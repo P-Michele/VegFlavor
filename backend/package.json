@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for VegFlavor website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valerio Belenchia, Edoardo Dottori, Alice Santolini, Michele Perini",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
