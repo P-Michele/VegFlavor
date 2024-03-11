@@ -1,0 +1,81 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* singup Section */
+.singup {
+    background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGt6YXV4czA5a2czMGgxd2J4eTdqNTUweGZ6ejBneWN2MHkydzd2cCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dllaWjCf0MV0nSNf8y/giphy.gif');
+    background-size: cover;
+    background-position: center;
+    color: #070707;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.singup-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.singup-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.social-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.social-links li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.social-links li img {
+    width: 30px;
+    height: 30px;
+}

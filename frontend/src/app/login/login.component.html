@@ -1,1 +1,28 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VegFlavor🌱 login</title>
+    <link rel="stylesheet" href="login.component.scss">
+</head>
+    <section class = "login">
+        <div class="login-content">
+            <h1>Accedi a VegFlavor🌱</h1>
+            <form>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Accedi</button>
+            </form>
+        </div>
+        </section>
+                <h3>Non hai un account?</h3>
+                
+                    <button class="btn" (click)="singUp()">Registrati</button>
+</html>
