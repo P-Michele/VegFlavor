@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
-import { ProfiloComponent } from './profilo/profilo.component';
+import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
-import { RicercaComponent } from './ricerca/ricerca.component';
+import { ResearchComponent } from './research/research.component';
 import { HomeComponent } from './home/home.component';
-import { DettagliRicettaComponent } from './dettagli-ricetta/dettagli-ricetta.component';
+import { RecipeDetailsComponent } from './recipeDetails/recipeDetails.component';
 import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
@@ -16,16 +16,16 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: "profilo",
-        component: ProfiloComponent
+        path: "profile",
+        component: ProfileComponent
     },
     {
-        path: "ricerca",
-        component: RicercaComponent
+        path: "research",
+        component: ResearchComponent
     },
     {
         path: "dettagli",
-        component: DettagliRicettaComponent
+        component: RecipeDetailsComponent
     },
     {
         path: "signup",
