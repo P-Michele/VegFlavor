@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RicercaComponent } from './ricerca/ricerca.component';
 import { HomeComponent } from './home/home.component';
 import { DettagliRicettaComponent } from './dettagli-ricetta/dettagli-ricetta.component';
-import { SingupComponent } from './singup/singup.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
     {
@@ -28,8 +28,8 @@ export const routes: Routes = [
         component: DettagliRicettaComponent
     },
     {
-        path: "singup",
-        component: SingupComponent
+        path: "signup",
+        component: SignupComponent
     },
     {
         path: "*",

@@ -2,15 +2,26 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 /* Typography */
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f7f7f7;
     color: #333;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    margin-bottom: 10px;
 }
 
 /* Header */
@@ -36,12 +47,19 @@ nav ul li a {
 
 /* Login Section */
 .Login {
-   // background-image: url('Login-bg.jpg');
+    //background-image: url('/frontend/VegnaLoginPage.jpg');
     background-size: cover;
     background-position: center;
     color: #070707;
     text-align: center;
     padding: 100px 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .Login-content h1 {

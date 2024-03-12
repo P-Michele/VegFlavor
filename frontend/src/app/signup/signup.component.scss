@@ -34,9 +34,9 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* singup Section */
-.singup {
-    background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGt6YXV4czA5a2czMGgxd2J4eTdqNTUweGZ6ejBneWN2MHkydzd2cCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dllaWjCf0MV0nSNf8y/giphy.gif');
+/* signup Section */
+.signup {
+   // background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGt6YXV4czA5a2czMGgxd2J4eTdqNTUweGZ6ejBneWN2MHkydzd2cCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dllaWjCf0MV0nSNf8y/giphy.gif');
     background-size: cover;
     background-position: center;
     color: #070707;
@@ -44,12 +44,12 @@ nav ul li a {
     padding: 100px 0;
 }
 
-.singup-content h1 {
+.signup-content h1 {
     font-size: 3em;
     margin-bottom: 20px;
 }
 
-.singup-content p {
+.signup-content p {
     font-size: 1.2em;
     margin-bottom: 30px;
 }
@@ -58,7 +58,7 @@ nav ul li a {
 footer {
     background-color: #333;
     color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .footer-content {
