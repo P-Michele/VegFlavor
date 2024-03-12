@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './ricerca.component.html',
   styleUrl: './ricerca.component.scss'
 })
-export class RicercaComponent {
 
+export class AppComponent {
+}
+export class RicercaComponent {
 }

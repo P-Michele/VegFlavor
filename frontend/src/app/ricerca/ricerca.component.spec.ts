@@ -21,3 +21,4 @@ describe('RicercaComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

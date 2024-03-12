@@ -1,33 +1,39 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ProfiloComponent } from './profilo/profilo.component';
 import { LoginComponent } from './login/login.component';
 import { RicercaComponent } from './ricerca/ricerca.component';
 import { HomeComponent } from './home/home.component';
 import { DettagliRicettaComponent } from './dettagli-ricetta/dettagli-ricetta.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
     {
-        path:"home",
+        path: "home",
         component: HomeComponent
-        },
-        {
-        path:"login",
+    },
+    {
+        path: "login",
         component: LoginComponent
-        },
-        {
-        path:"profilo",
+    },
+    {
+        path: "profilo",
         component: ProfiloComponent
-        },
-        {
-        path:"ricerca",
+    },
+    {
+        path: "ricerca",
         component: RicercaComponent
-        },
-        {
-        path:"dettagli",
+    },
+    {
+        path: "dettagli",
         component: DettagliRicettaComponent
-        },
-        {
-        path:"*",
-        redirectTo: "home"
-        }
+    },
+    {
+        path: "signup",
+        component: SignupComponent
+    },
+    {
+        path: "*",
+        redirectTo: "home",
+        pathMatch: "full"
+    }
 ];
