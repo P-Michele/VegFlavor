@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { RicercaComponent } from './ricerca.component';
 
@@ -21,3 +22,17 @@ describe('RicercaComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+@Pipe({ name:'search' })
+export class SearchPipe implements PipeTransform {
+  transform(recipes: string[], searchInput: string): any[] {
+    if (!searchInput) {
+      return [];
+    }
+    searchInput = searchInput.toLowerCase();
+    return recipes.filter(
+      x => x.toLowerCase().includes(searchInput)
+    )
+  }
+}
+

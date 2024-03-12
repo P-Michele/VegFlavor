@@ -1,1 +1,10 @@
-<p>ricerca works!</p>
+<!DOCTYPE html>
+<html>
+    <section>
+        <h5>Ricerca Ricette Vegane</h5>
+        <input [value] = "search" type="text"  placeholder="Cerca ricetta" (input)="search" size="50">
+    </section>
+    <section *ngFor = "let recipe of veganrecipes | search:search">
+        {{recipe.name}}
+    </section>
+</html>
