@@ -2,11 +2,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VegFlavor🌱 login</title>
-    <link rel="stylesheet" href="login.component.scss">
+  <!-- Includi i fogli di stile di Angular Material -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+  <!-- Includi il foglio di stile CSS del componente -->
+  <link rel="stylesheet" href="login.component.scss">
 </head>
 <section class="Login">
-    <div class="Login-content">
-        <h1>Accedi a VegFlavor🌱</h1>
+  <div class="Login-content">
+    <h1>Accedi a VegFlavor🌱</h1>
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
       <div>
         <label for="email">Email </label>

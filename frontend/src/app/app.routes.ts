@@ -1,10 +1,12 @@
-import { RouterModule, Routes } from '@angular/router';
+import {  Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
+
 import { ResearchComponent } from './research/research.component';
 import { HomeComponent } from './home/home.component';
 import { RecipeDetailsComponent } from './recipeDetails/recipeDetails.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 export const routes: Routes = [
     {
@@ -29,7 +31,7 @@ export const routes: Routes = [
     },
     {
         path: "signup",
-        component: SignupComponent
+        component: SignUpComponent
     },
     {
         path: "*",

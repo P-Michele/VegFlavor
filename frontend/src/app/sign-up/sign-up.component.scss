@@ -2,26 +2,15 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 /* Typography */
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f7f7f7;
   color: #333;
-}
-
-label {
-  margin-bottom: 5px;
-}
-
-input {
-  margin-bottom: 10px;
 }
 
 /* Header */
@@ -45,9 +34,9 @@ nav ul li a {
   text-decoration: none;
 }
 
-/* Login Section */
-.Login {
-  //background-image: url('/frontend/VegnaLoginPage.jpg');
+/* signup Section */
+.signup {
+ // background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGt6YXV4czA5a2czMGgxd2J4eTdqNTUweGZ6ejBneWN2MHkydzd2cCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dllaWjCf0MV0nSNf8y/giphy.gif');
   background-size: cover;
   background-position: center;
   color: #070707;
@@ -55,19 +44,12 @@ nav ul li a {
   padding: 100px 0;
 }
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.Login-content h1 {
+.signup-content h1 {
   font-size: 3em;
   margin-bottom: 20px;
 }
 
-.Login-content p {
+.signup-content p {
   font-size: 1.2em;
   margin-bottom: 30px;
 }
@@ -76,7 +58,7 @@ nav ul li a {
 footer {
   background-color: #333;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .footer-content {
