@@ -54,7 +54,7 @@ const loginUser = (req, res) => {
           }
 
           // Generate JWT token
-          const token = jwt.sign({ Id: user.id, Username: user.Username, Email: user.email }, jwtConfig.secret, { expiresIn: jwtConfig.exp });
+          const token = jwt.sign({ Id: user.id, name: user.name, surname: user.surname, Email: user.email }, jwtConfig.secret, { expiresIn: jwtConfig.exp });
 
           // Send token to client
           res.status(200).json({ token });
