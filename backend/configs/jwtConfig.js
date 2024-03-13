@@ -1,6 +1,6 @@
 const jwt = {
-    secret: process.env.JWT_Secret,
-    exp: process.env.JWT_Exp
+    secret: process.env.JWT_SECRET,
+    exp: process.env.JWT_EXP
 }
 
 module.exports = jwt;

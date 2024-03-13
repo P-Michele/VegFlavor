@@ -1,8 +1,6 @@
-//const Recipe = require("./recipeModel.js");
-
 module.exports = (sequelize, Sequelize, DataTypes) => {
     const User = sequelize.define(
-      "User", // Model name
+      "user", // Model name
       {
         // Attributes
         id: {
@@ -13,31 +11,31 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         isAdmin:{
           type: DataTypes.BOOLEAN,
           defaultValue: false,
+          allowNull: false
         },
         name: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: false
         },
         surname:{
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: false
         },
         email: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: false
           //unique e validate
         },
         password: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: false
         }
       },
       {
         // Options
-        timestamps: true,
-        underscrored: true,
-        createdAt: "created_at",
-        updatedAt: "updated_at"
+        timestamps: true
       }
     );
-
-    //User.hasMany(Recipe, {as: "recipes"});
 
     return User;
   };

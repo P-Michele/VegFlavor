@@ -1,7 +1,5 @@
-//const User = require("./userModel.js");
-
 module.exports = (sequelize, Sequelize, DataTypes) => {
-    const Recipe = sequelize.define("Recipe", {
+    const Recipe = sequelize.define("recipe", {
         id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
@@ -30,18 +28,12 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         servingSize: {
           type: DataTypes.INTEGER,
           allowNull: false
-        },
-        createdAt: {
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW
-        },
-        updatedAt: {
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW
         }
-      });
-
-      //Recipe.belongsTo(User);
+      },
+      {
+        timestamps: true
+      }
+    );
 
       return Recipe;
 };
