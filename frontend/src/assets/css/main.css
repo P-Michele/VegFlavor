@@ -305,7 +305,6 @@ section {
 @media (min-width: 1280px) {
   .navbar {
     padding: 0;
-    background-color: #bcf5bc !important;
   }
 
   .navbar ul {
@@ -314,7 +313,6 @@ section {
     display: flex;
     list-style: none;
     align-items: center;
-
   }
 
   .navbar li {
