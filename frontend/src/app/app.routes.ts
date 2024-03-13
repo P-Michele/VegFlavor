@@ -1,10 +1,12 @@
-import { RouterModule, Routes } from '@angular/router';
-import { ProfiloComponent } from './profilo/profilo.component';
-import { LoginComponent } from './login/login.component';
-import { RicercaComponent } from './ricerca/ricerca.component';
+import {  Routes } from '@angular/router';
+import { ProfileComponent } from './profile/profile.component';
+
+import { ResearchComponent } from './research/research.component';
 import { HomeComponent } from './home/home.component';
-import { DettagliRicettaComponent } from './dettagli-ricetta/dettagli-ricetta.component';
-import { SignupComponent } from './signup/signup.component';
+import { RecipeDetailsComponent } from './recipeDetails/recipeDetails.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 export const routes: Routes = [
     {
@@ -16,24 +18,23 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: "profilo",
-        component: ProfiloComponent
+        path: "profile",
+        component: ProfileComponent
     },
     {
-        path: "ricerca",
-        component: RicercaComponent
+        path: "research",
+        component: ResearchComponent
     },
     {
         path: "dettagli",
-        component: DettagliRicettaComponent
+        component: RecipeDetailsComponent
     },
     {
         path: "signup",
-        component: SignupComponent
+        component: SignUpComponent
     },
-    {
-        path: "*",
-        redirectTo: "home",
-        pathMatch: "full"
-    }
+  { path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  }
 ];

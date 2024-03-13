@@ -1,25 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  VegFlavor🌱
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Collapsible wrapper -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"[routerLink]="'home'">Home</a>
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">VegFlavor🌱</a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'home'">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"[routerLink]="'login'">Login</a>
+          <a class="nav-link" [routerLink]="'login'">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="'profilo'">Profilo</a>
+          <a class="nav-link" [routerLink]="'signup'">Registrati</a>
         </li>
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a data-mdb-dropdown-init
+             class="dropdown-toggle d-flex align-items-center hidden-arrow"
+             id="navbarDropdownMenuAvatar"
+             role="button"
+             aria-expanded="false"
+          >
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
+                 height="25"
+                 alt="Black and White Portrait of a Man"
+                 loading="lazy"
+            /> <!--TODO MODIFICARE IL LINK ALL'AVATAR-->
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuAvatar">
+            <li class="nav-item">
+              <a class="dropdown-ite" [routerLink]="'profile'">Profilo</a>
+            </li>
+            <li>
+              <a class="dropdown-item">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Avatar -->
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Ricerca" aria-label="Ricerca">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ricerca</button>
-      </form>
     </div>
-  </nav>
-  <router-outlet></router-outlet>
+    <!--wrapper -->
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+<router-outlet></router-outlet>

@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VegFlavor🌱 login</title>
-    <link rel="stylesheet" href="login.component.scss">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VegFlavor🌱 login</title>
+  <!-- Includi i fogli di stile di Angular Material -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+  <!-- Includi il foglio di stile CSS del componente -->
+  <link rel="stylesheet" href="login.component.scss">
 </head>
 <section class="Login">
-    <div class="Login-content">
-        <h1>Accedi a VegFlavor🌱</h1>
-        <form>
-            <div>
-                <label for="email">Email </label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password </label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Accedi</button>
-        </form>
-    </div>
-
-    <h4>Non hai un account?</h4>
-
-    <button class="btn" (click)="signup()">Registrati</button>
+  <div class="Login-content">
+    <h1>Accedi a VegFlavor🌱</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+      <div>
+        <label for="email">Email </label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="password">Password </label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn">Accedi</button>
+    </form>
+  </div>
 </section>
-
-</html>

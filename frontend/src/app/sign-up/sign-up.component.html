@@ -1,0 +1,37 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VegFlavor🌱 signup</title>
+  <link rel="stylesheet" href="sign-up.component.scss">
+</head>
+  <section class = "sign-up">
+      <div class="sign-up-content">
+          <h1>Registrati a VegFlavor🌱</h1>
+
+<form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
+    <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="Ex. Jon" formControlName="name" />
+    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Ex. Jon" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+        matInput
+        type="password"
+        placeholder="Ex. Jon"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <button
+    color="accent"
+    [disabled]="!signupForm.valid"
+    mat-raised-button
+    type="submit"
+  >
+    <span>Sign up</span>
+  </button>
+</form>
