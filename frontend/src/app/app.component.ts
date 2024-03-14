@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,14 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 })
 export class AppComponent {
   title = 'frontend2';
+
+  constructor(private loginService: LoginService) {}
+
+  logout(): void {
+    this.loginService.logout();
+  }
+  isLoggedIn(): boolean {
+    return this.loginService.isLoggedIn();
+  }
+  
 }

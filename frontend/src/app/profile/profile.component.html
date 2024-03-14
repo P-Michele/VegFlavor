@@ -36,12 +36,13 @@
               <!-- Form Group (first name)-->
               <div class="col-md-6">
                 <label class="small mb-1" for="inputFirstName">First name</label>
-                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
+                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" [value]="currentUser.name">
               </div>
+              
               <!-- Form Group (last name)-->
               <div class="col-md-6">
                 <label class="small mb-1" for="inputLastName">Last name</label>
-                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
+                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" [value]="currentUser.surname">
               </div>
             </div>
             <!-- Form Row        -->
@@ -60,7 +61,7 @@
             <!-- Form Group (email address)-->
             <div class="mb-3">
               <label class="small mb-1" for="inputEmailAddress">Email address</label>
-              <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+              <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" [value]="currentUser.email">
             </div>
             <!-- Form Row-->
             <div class="row gx-3 mb-3">

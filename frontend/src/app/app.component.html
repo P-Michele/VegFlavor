@@ -10,10 +10,10 @@
           <a class="nav-link text-success" [routerLink]="'home'">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-success" [routerLink]="'login'">Login</a>
+          <a *ngIf="!isLoggedIn()" class="nav-link text-success" [routerLink]="'login'">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-success" [routerLink]="'register'">Registrati</a>
+          <a *ngIf="!isLoggedIn()" class="nav-link text-success" [routerLink]="'register'">Registrati</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-success" role="button"
@@ -21,12 +21,13 @@
             <i class="bi bi-person-fill"></i> Profilo </a>
           <!-- Dropdown menu -->
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li>
+            <li *ngIf="isLoggedIn()">
               <a class="dropdown-item text-success" [routerLink]="'profile'"> Account </a>
             </li>
-            <li>
-              <a class="dropdown-item text-success" >Log out</a>
-            </li>
+            <li *ngIf="isLoggedIn()">
+              <!-- Aggiungi un evento click che chiama la funzione di logout -->
+              <a class="dropdown-item text-success" (click)="logout()">Log out</a>
+          </li>
           </ul>
         </li>
       </ul>
