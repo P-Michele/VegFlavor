@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "prova": {
+    "progettoWeb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/prova",
+            "outputPath": "dist/progettoWeb",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,11 +30,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css", //<--add this line
+              "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" //<--and this line
             ]
           },
           "configurations": {
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "prova:build:production"
+              "buildTarget": "progettoWeb:build:production"
             },
             "development": {
-              "buildTarget": "prova:build:development"
+              "buildTarget": "progettoWeb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "prova:build"
+            "buildTarget": "progettoWeb:build"
           }
         },
         "test": {

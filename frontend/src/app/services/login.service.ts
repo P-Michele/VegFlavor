@@ -14,7 +14,7 @@ import { environment } from '../../environments/environment.development';
 export class LoginService {
 
 
-  utenteLoggato$= new BehaviorSubject<boolean>(false);
+  loggedUser= new BehaviorSubject<boolean>(false);
   userId: Pick<User, "id"> | undefined;
 
   httpOptions: {headers: HttpHeaders}={
@@ -44,7 +44,7 @@ export class LoginService {
       tap((tokenObject: {token: string; userId: Pick<User,"id">})=>{
         this.userId=tokenObject.userId;
         localStorage.setItem("token",tokenObject.token);
-        this.utenteLoggato$.next(true);
+        this.loggedUser.next(true);
         this.router.navigate(['/home']);
       }),
       catchError(this.errorHandlerService.handleError<{
@@ -52,5 +52,5 @@ export class LoginService {
       }>("login"))
       );
   }
-  
+
 }
