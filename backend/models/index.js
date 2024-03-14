@@ -37,8 +37,4 @@ db.recipes_ingredients = require("./recipe_ingredientModel.js")(sequelize, Seque
 db.users.hasMany(db.recipes);
 db.recipes.belongsTo(db.users);
 
-//Many to Many, recipes with many ingredients and ingredients with many recipes
-db.ingredients.belongsToMany(db.recipes, {through: db.recipes_ingredients, onDelete: 'CASCADE'});
-db.recipes.belongsToMany(db.ingredients, {through: db.recipes_ingredients, onDelete: 'CASCADE'});
-
 module.exports = db;
