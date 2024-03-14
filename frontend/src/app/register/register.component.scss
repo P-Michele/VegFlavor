@@ -1,0 +1,117 @@
+/* Stili base */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Cambia questo valore al colore desiderato */
+}
+
+/* Per il componente principale */
+.body-background {
+  background-color: #f0f0f0; /* Grigio chiaro */
+}
+
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.signup-form {
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-radio input[type="radio"] {
+  display: none;
+}
+
+.form-radio label {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-right: 10px;
+  font-size: 16px;
+  color: #444;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-radio input[type="radio"]:checked + label {
+  background-color: #2196F3;
+  color: #fff;
+}
+
+.form-textbox {
+  margin-bottom: 20px;
+}
+
+.form-textbox label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.form-textbox input[type="text"],
+.form-textbox input[type="email"],
+.form-textbox input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.agree-term {
+  display: none;
+}
+
+.label-agree-term {
+  font-size: 14px;
+}
+
+.submit {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #2196F3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #0b7dda;
+}
+
+.loginhere {
+  text-align: center;
+  font-size: 14px;
+}
+
+.loginhere-link {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.loginhere-link:hover {
+  text-decoration: underline;
+}

@@ -1,14 +1,13 @@
 import { Component,OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
-  imports: [ReactiveFormsModule,MatInputModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule],
   styleUrls: ['./login.component.scss'],
  
 })
@@ -33,5 +32,6 @@ export class LoginComponent implements OnInit{
     this.loginService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe();
+      console.log("loggato");
   }
 }

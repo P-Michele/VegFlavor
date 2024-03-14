@@ -8,8 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-logout() {
-throw new Error('Method not implemented.');
-}
 
 }
