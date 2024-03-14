@@ -28,8 +28,6 @@ db.sequelize = sequelize;
 //Tables
 db.users = require("./userModel.js")(sequelize, Sequelize, DataTypes);
 db.recipes = require("./recipeModel.js")(sequelize, Sequelize, DataTypes);
-db.ingredients = require("./ingredientModel.js")(sequelize, Sequelize, DataTypes);
-db.recipes_ingredients = require("./recipe_ingredientModel.js")(sequelize, Sequelize, DataTypes);
 
 //Relations
 
