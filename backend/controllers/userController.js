@@ -1,39 +1,45 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const db = require('../models');
-const User=db.users;
-const jwtConfig=require("../configs/jwtConfig");
+const User = db.users;
+const jwtConfig = require("../configs/jwtConfig");
 
 const registerUser = (req, res) => {
-    const { name, surname, email, password } = req.body;
+  const { name, surname, email, password } = req.body;
 
-    if(!name || !surname || !email || !password){
-        return res.status(400).json({ message: 'Please fill all fields' });
-    }
+  if (!name || !surname || !email || !password) {
+    return res.status(400).json({ message: 'Please fill all fields' });
+  }
 
-
-    User.findOne({ where: { email } })
+  User.findOne({ where: { email } })
     .then(user => {
       if (user) {
         return res.status(400).json({ message: 'User already exists' });
       }
-
       bcrypt.hash(password, 10)
-      .then(hashedPassword => {
-        // Create a new user in the database
-        return User.create({ name, surname, email, password: hashedPassword });
-      })
-      .then((newUser) => {
-        // Return the newly created user
-        res.status(201).json(newUser);
-      })
-      .catch(error => {
-        console.error('Error registering user:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      });
+        .then(hashedPassword => {
+          // Create a new user in the database
+          return User.create({ name, surname, email, password: hashedPassword });
+        })
+        .then((newUser) => {
+          // Generate JWT token
+          const token = jwt.sign({
+            Id: newUser.id,
+            Name: newUser.name,
+            Surname: newUser.surname,
+            Email: newUser.email,
+            IsAdmin: newUser.isAdmin
+          }, jwtConfig.secret, { expiresIn: jwtConfig.exp });
+          // Return the newly created user
+          res.status(201).json({ newUser, token });
+        })
+        .catch(error => {
+          console.error('Error registering user:', error);
+          res.status(500).json({ message: 'Internal server error' });
+        });
 
     })
-  };
+};
 
 
 
@@ -54,8 +60,12 @@ const loginUser = (req, res) => {
           }
 
           // Generate JWT token
-          const token = jwt.sign({ Id: user.id, Name: user.name, Surname: user.surname, Email: user.email, IsAdmin: user.IsAdmin }, 
-            jwtConfig.secret, { expiresIn: jwtConfig.exp });
+          const token = jwt.sign({
+            Id: user.id,
+            Name: user.name,
+            Surname: user.surname,
+            Email: user.email
+          }, jwtConfig.secret, { expiresIn: jwtConfig.exp });
 
           // Send token to client
           res.status(200).json({ token });
@@ -72,6 +82,6 @@ const loginUser = (req, res) => {
 };
 
 module.exports = {
-    registerUser,
-    loginUser,
+  registerUser,
+  loginUser,
 };
