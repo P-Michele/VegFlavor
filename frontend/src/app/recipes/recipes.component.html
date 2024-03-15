@@ -1,1 +1,22 @@
-<p>recipes works!</p>
+<!DOCTYPE html>
+<html>
+    <div>
+        <h2>Recipes</h2>
+        <ul id="recipe-list">
+            <li>{{ recipes[0].title }}: {{ recipes[0].description }}</li>
+            <li>{{ recipes[1].title }}: {{ recipes[1].description }}</li>
+            <li>{{ recipes[2].title }}: {{ recipes[2].description }}</li>
+            <li>{{ recipes[3].title }}: {{ recipes[3].description }}</li>
+            <li>{{ recipes[4].title }}: {{ recipes[4].description }}</li>
+            <li>{{ recipes[5].title }}: {{ recipes[5].description }}</li>
+            <li>{{ recipes[6].title }}: {{ recipes[6].description }}</li>
+            <li>{{ recipes[7].title }}: {{ recipes[7].description }}</li>
+        </ul>
+    </div>
+    
+    <div id="div">Page: {{currentPage}}</div>
+    <div class="pagination">
+        <button class="previous" (click)="prevPage()">Previous</button>
+        <button class="next" (click)="nextPage()">Next</button>
+    </div>
+</html>
