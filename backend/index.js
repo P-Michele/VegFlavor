@@ -28,8 +28,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
 app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/recipes", require("./routes/recipeRoutes"));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
