@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <div>
-        <h2>Recipes</h2>
-        <ul id="recipe-list">
-            <li>{{ recipes[0].title }}: {{ recipes[0].description }}</li>
-            <li>{{ recipes[1].title }}: {{ recipes[1].description }}</li>
-            <li>{{ recipes[2].title }}: {{ recipes[2].description }}</li>
-            <li>{{ recipes[3].title }}: {{ recipes[3].description }}</li>
-            <li>{{ recipes[4].title }}: {{ recipes[4].description }}</li>
-            <li>{{ recipes[5].title }}: {{ recipes[5].description }}</li>
-            <li>{{ recipes[6].title }}: {{ recipes[6].description }}</li>
-            <li>{{ recipes[7].title }}: {{ recipes[7].description }}</li>
-        </ul>
-    </div>
-    
-    <div id="div">Page: {{currentPage}}</div>
-    <div class="pagination">
-        <button class="previous" (click)="prevPage()">Previous</button>
-        <button class="next" (click)="nextPage()">Next</button>
-    </div>
+<title>Tutte le Ricette</title>
+
+<h2>Ricette</h2>
+<div id="recipe-list">
+    <ul>
+        <li *ngFor="let recipe of pagedRecipes">
+            <strong>{{ recipe.title }}</strong>: {{ recipe.description }}<br>
+            Istruzioni: {{ recipe.instructions }}<br>
+            Ingredienti: {{ recipe.ingredients }}<br>
+            Tempo di Preparazione: {{ recipe.prepTime }} minutes<br>
+            Tempo di Cottura: {{ recipe.cookTime }} minutes<br>
+            Porzioni: {{ recipe.servingSize }}<br>
+            <br>
+            Paginated Page: {{ currentPage }} of {{ totalPages() }}<br>
+        </li>
+    </ul>
+</div>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item" (click)="prevPage()">
+            <a class="page-link" aria-label="Previous">Previous</a>
+        </li>
+        <ng-container *ngFor="let item of pageNumbers()">
+            <li class="page-item" *ngIf="item === '...'">
+                <a class="page-link">...</a>
+            </li>
+            <li class="page-item" *ngIf="item !== '...'">
+                <a class="page-link" (click)="goToPage(+item)" [class.active]="currentPage === item">{{ item }}</a>
+            </li>
+        </ng-container>
+        <li class="page-item" (click)="nextPage()">
+            <a class="page-link" aria-label="Next">Next</a>
+        </li>
+    </ul>
+</nav>
+
 </html>
