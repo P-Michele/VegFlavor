@@ -4,6 +4,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import { LoginComponent } from './login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { LoginService } from './services/login.service';
 
 export const routes: Routes = [
 
@@ -13,7 +14,8 @@ export const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoginService] 
   },
   {
     path: "profile",

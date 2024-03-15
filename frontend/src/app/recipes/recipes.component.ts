@@ -1,231 +1,71 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Recipe } from '../models/recipe';
-import { RecipeService } from '../services/recipe.service';
+import { RecipesService } from '../services/recipes.service';
 import { discardPeriodicTasks } from '@angular/core/testing';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [CommonModule,RouterLink],
   templateUrl: './recipes.component.html',
-  styleUrl: './recipes.component.scss',
-  template: `
-  <h2>{{ recipe.title }}</h2>
-  <p>{{ recipe.description }}</p>
-  <p>Prep Time: {{ recipe.prepTime }} minutes</p>
-  <p>Cook Time: {{ recipe.cookTime }} minutes</p>
-  <p>Serving Size: {{ recipe.servingSize }}</p>
-  <h3>Ingredients</h3>
-  <p>{{ recipe.ingredients }}</p>
-  <h3>Instructions</h3>
-  <p>{{ recipe.instructions }}</p>
-`
+  styleUrl: './recipes.component.scss'
 })
 export class RecipesComponent implements OnInit {
 
-  recipes: Recipe[] = [
-    {
-      id: 1,
-      title: 'Spaghetti',
-      description: 'A classic Italian dish',
-      instructions: 'Boil water, add pasta, cook for 10 minutes, drain, add sauce',
-      ingredients: 'Pasta, sauce',
-      prepTime: 5,
-      cookTime: 10,
-      servingSize: 4
-    },
-    {
-      id: 2,
-      title: 'Tacos',
-      description: 'A classic Mexican dish',
-      instructions: 'Cook meat, add to tortilla, add toppings',
-      ingredients: 'Tortillas, meat, toppings',
-      prepTime: 10,
-      cookTime: 15,
-      servingSize: 4
-    },
-    {
-      id: 3,
-      title: 'Pizza',
-      description: 'A classic Italian dish',
-      instructions: 'Make dough, add sauce and toppings, bake',
-      ingredients: 'Dough, sauce, toppings',
-      prepTime: 20,
-      cookTime: 15,
-      servingSize: 8
-    },
-    {
-      id: 4,
-      title: 'Hamburger',
-      description: 'A classic American dish',
-      instructions: 'Cook meat, add to bun, add toppings',
-      ingredients: 'Bun, meat, toppings',
-      prepTime: 10,
-      cookTime: 10,
-      servingSize: 4
-    },
-    {
-      id: 5,
-      title: 'Chicken Alfredo',
-      description: 'A classic Italian dish',
-      instructions: 'Cook chicken, make sauce, add to pasta',
-      ingredients: 'Pasta, chicken, sauce',
-      prepTime: 15,
-      cookTime: 20,
-      servingSize: 4
-    },
-    {
-      id: 6,
-      title: 'Chicken Fried Rice',
-      description: 'A classic Chinese dish',
-      instructions: 'Cook chicken, cook rice, add to pan, add veggies',
-      ingredients: 'Rice, chicken, veggies',
-      prepTime: 15,
-      cookTime: 20,
-      servingSize: 4
-    },
-    {
-      id: 7,
-      title: 'Chicken Tacos',
-      description: 'A classic Mexican dish',
-      instructions: 'Cook chicken, add to tortilla, add toppings',
-      ingredients: 'Tortillas, chicken, toppings',
-      prepTime: 10,
-      cookTime: 15,
-      servingSize: 4
-    },
-    {
-      id: 8,
-      title: 'Chicken Parmesan',
-      description: 'A classic Italian dish',
-      instructions: 'Cook chicken, add sauce, bake',
-      ingredients: 'Chicken, sauce',
-      prepTime: 15,
-      cookTime: 20,
-      servingSize: 4
-    },
-    {
-      id: 9,
-      title: 'Chicken Noodle Soup',
-      description: 'A classic American dish',
-      instructions: 'Cook chicken, make broth, add noodles',
-      ingredients: 'Chicken, broth, noodles',
-      prepTime: 15,
-      cookTime: 20,
-      servingSize: 4
-    },
-    {
-      id: 10,
-      title: 'Chicken and Rice',
-      description: 'A classic American dish',
-      instructions: 'Cook chicken, cook rice, add to pan, add veggies',
-      ingredients: 'Rice, chicken, veggies',
-      prepTime: 15,
-      cookTime: 20,
-      servingSize: 4
-    },
-  ]; // Array of recipes from database
-  pagedRecipes: Recipe[] = []; // Recipes to display on the current page
+
   currentPage: number = 1;
   pageSize: number = 2;
-  Array: any;
+  recipes$!: Observable<{ recipes: Recipe[], totalPages: number }>;
+  totalPages!:number;
 
-  constructor(private recipeService: RecipeService) { }
-
+  constructor(private recipesService: RecipesService,private router:Router) { }
+  
   ngOnInit(): void {
-    this.updateDisplayRecipes();
+    this.getRecipes(this.currentPage, this.pageSize);
   }
+
+  getRecipes(currentPage: number, pageSize: number): void {
+    this.recipes$ = this.recipesService.getRecipes(currentPage, pageSize);
+    this.recipes$.subscribe(data => {
+      this.totalPages = data.totalPages;
+    });
+  }
+
   nextPage(): void {
-    if (this.currentPage * this.pageSize < this.recipes.length) {
+    if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.updateDisplayRecipes();
+      this.getRecipes(this.currentPage, this.pageSize);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
     }
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.updateDisplayRecipes();
+      this.getRecipes(this.currentPage, this.pageSize);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
     }
   }
-  updateDisplayRecipes(): void {
-    const start = (this.currentPage - 1) * this.pageSize;
-    const end = start + this.pageSize;
-    const displayRecipes = this.recipes.slice(start, end);
-    this.pagedRecipes = displayRecipes;
 
-    const recipeList = document.getElementById('recipe-list');
-    if (recipeList) { // check that recipeList is not null
-      recipeList.innerHTML = ''; // clear the list
-
-      displayRecipes.forEach((recipe) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-                <strong>${recipe.title}</strong>: ${recipe.description}<br>
-                Instructions: ${recipe.instructions}<br>
-                Ingredients: ${recipe.ingredients}<br>
-                Prep Time: ${recipe.prepTime} minutes<br>
-                Cook Time: ${recipe.cookTime} minutes<br>
-                Serving Size: ${recipe.servingSize}<br>
-                <br>
-              `;
-        recipeList.appendChild(listItem);
-      });
-
-      const pagination = document.getElementById('pagination');
-      if (pagination) {
-        pagination.innerHTML = ''; // clear pagination
-
-        // Add previous button
-        if (this.currentPage > 1) {
-          const previousButton = document.createElement('button');
-          previousButton.textContent = 'Previous';
-          previousButton.onclick = () => {
-            this.prevPage();
-          };
-          pagination.appendChild(previousButton);
-        }
-
-        // Add page numbers
-        for (let i = 1; i <= this.totalPages(); i++) {
-          const pageNumberButton = document.createElement('button');
-          pageNumberButton.textContent = i.toString();
-          pageNumberButton.onclick = () => {
-            this.goToPage(i);
-          };
-          if (i === this.currentPage) {
-            pageNumberButton.classList.add('active');
-          }
-          pagination.appendChild(pageNumberButton);
-        }
-
-        // Add next button
-        if (this.currentPage < this.totalPages()) {
-          const nextButton = document.createElement('button');
-          nextButton.textContent = 'Prossimo';
-          nextButton.onclick = () => {
-            this.nextPage();
-          };
-          pagination.appendChild(nextButton);
-        }
-      }
-    }
-  }
   goToPage(pageNumber: number): void {
-    if (pageNumber >= 1 && pageNumber <= this.totalPages()) {
+    if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.currentPage = pageNumber;
-      this.updateDisplayRecipes();
+      this.getRecipes(this.currentPage, this.pageSize);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
     }
   }
 
-  totalPages(): number {
-    return Math.ceil(this.recipes.length / this.pageSize);
+  getTotalPages(): number {
+    return this.totalPages;
   }
+
   pageNumbers(): (number | string)[] {
-    const totalPages = this.totalPages();
+    const totalPages = this.totalPages;
     const currentPage = this.currentPage;
     const pagesToShow = 9; // Number of pages to show without ellipsis
   

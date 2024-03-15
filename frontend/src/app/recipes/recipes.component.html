@@ -5,16 +5,17 @@
 <h2>Ricette</h2>
 <div id="recipe-list">
     <ul>
-        <li *ngFor="let recipe of pagedRecipes">
-            <strong>{{ recipe.title }}</strong>: {{ recipe.description }}<br>
-            Istruzioni: {{ recipe.instructions }}<br>
-            Ingredienti: {{ recipe.ingredients }}<br>
-            Tempo di Preparazione: {{ recipe.prepTime }} minutes<br>
-            Tempo di Cottura: {{ recipe.cookTime }} minutes<br>
-            Porzioni: {{ recipe.servingSize }}<br>
-            <br>
-            Paginated Page: {{ currentPage }} of {{ totalPages() }}<br>
+        <li *ngFor="let recipe of (recipes$ | async)?.recipes">
+                <strong>{{ recipe.title }}</strong>: {{ recipe.description }}<br>
+                Instructions: {{ recipe.instructions }}<br>
+                Ingredients: {{ recipe.ingredients }}<br>
+                Prep Time: {{ recipe.prepTime }} minutes<br>
+                Cook Time: {{ recipe.cookTime }} minutes<br>
+                Serving Size: {{ recipe.servingSize }}<br><br>
+         
+            
         </li>
+        Paginated Page: {{ currentPage }} of {{ getTotalPages() }}<br>
     </ul>
 </div>
 
