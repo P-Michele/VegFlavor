@@ -59,8 +59,6 @@ export class LoginService {
     catchError(this.errorHandlerService.handleError<string>("login"))
   );
 }
-
-
   getCurrentUser(token:string): { name: string, id: string,surname:string,email:string,isAdmin:boolean } {
     const decodedToken = this.jwtHelper.decodeToken(token);
     return {
@@ -81,4 +79,35 @@ export class LoginService {
     this.loggedUser.next(false);
     this.router.navigate(['/login']);
   }
+
+  isTokenExpired() {
+    const tokenIsPresent = localStorage.getItem(this.JWT_TOKEN);
+    //se il token non esiste ritorna true e viene reindirizzato alla login 
+    if (!tokenIsPresent) {
+      this.router.navigate(['/login']);
+      return true;
+    }
+    //altrimenti prende il token 
+    const token = JSON.parse(tokenIsPresent).access_token;
+    //il token viene decodificato 
+    const decoded = this.jwtHelper.decodeToken(token);
+    //verifica se c'è il campo exp, se questo non esiste torna true perchè significa che è scaduto e 
+    //viene indirizzato alla pagina login  
+    if (!decoded.exp){
+      this.router.navigate(['/login']);
+      return true;
+    }
+    //controlla se exp è precedente alla data corrente e in caso affermativo ritorna true perchè è scaduto il token
+    //e viene reindirizzato alla login 
+    const expirationDate = decoded.exp * 1000;
+    const now = new Date().getTime();
+    if(expirationDate < now){
+       this.router.navigate(['/login']);
+       return true;
+    }
+    //in caso fosse ancora valido restituisce false
+   return false;
+    
+  }
+
 }
