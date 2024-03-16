@@ -1,5 +1,5 @@
 
-import { LoginService } from '../services/login.service';
+import { AuthService } from '../services/auth.service';
 import { FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,16 +11,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './login.component.html',
   imports: [ReactiveFormsModule,CommonModule,RouterLink],
   styleUrls: ['./login.component.scss'],
- 
+
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
 
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: AuthService){}
   ngOnInit(): void {
     this.loginForm= this.createFormGroup();
   }
-  
+
   createFormGroup():FormGroup{
     return new FormGroup({
       email:new FormControl("",[Validators.required,Validators.email]),

@@ -22,7 +22,7 @@ export class RecipesComponent implements OnInit {
   totalPages!:number;
 
   constructor(private recipesService: RecipesService,private router:Router) { }
-  
+
   ngOnInit(): void {
     this.getRecipes(this.currentPage, this.pageSize);
   }
@@ -68,15 +68,15 @@ export class RecipesComponent implements OnInit {
     const totalPages = this.totalPages;
     const currentPage = this.currentPage;
     const pagesToShow = 9; // Number of pages to show without ellipsis
-  
+
     // If there are less than 'pagesToShow' pages, show all pages
     if (totalPages <= pagesToShow) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
-  
+
     let startPage: number;
     let endPage: number;
-  
+
     // Calculate startPage and endPage based on the current page
     if (currentPage <= Math.ceil(pagesToShow / 2)) {
       // Display pages from 1 to pagesToShow
@@ -91,9 +91,9 @@ export class RecipesComponent implements OnInit {
       startPage = currentPage - Math.floor(pagesToShow / 2);
       endPage = currentPage + Math.floor(pagesToShow / 2);
     }
-  
+
     const pages = Array.from({ length: endPage - startPage + 1 }, (_, index) => index + startPage);
-  
+
     // Add ellipsis and first/last page if necessary
     const result = [];
     if (startPage > 1) {
@@ -109,8 +109,8 @@ export class RecipesComponent implements OnInit {
       }
       result.push(totalPages);
     }
-  
+
     return result;
   }
-  
+
 }

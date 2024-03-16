@@ -4,7 +4,8 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import { LoginComponent } from './login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { LoginService } from './services/login.service';
+import { AuthService } from './services/auth.service';
+import {NotFoundComponent} from "./not-found/not-found.component";
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 
 export const routes: Routes = [
@@ -16,7 +17,6 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
-    canActivate: [LoginService] 
   },
   {
     path: "profile",
@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path:"register",
     component: RegisterComponent,
-    canActivate: [LoginService] 
+    canActivate: [LoginService]
   },
   {
     path: "recipes",
@@ -36,7 +36,7 @@ export const routes: Routes = [
     component: RecipeDetailsComponent
   },
   { path: '**',
-    redirectTo: 'home',
+    component: NotFoundComponent,
     pathMatch: 'full'
   }
 ];

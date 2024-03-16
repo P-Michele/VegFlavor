@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import { LoginService } from './services/login.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { LoginService } from './services/login.service';
 export class AppComponent {
   title = 'frontend2';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: AuthService) {}
 
   logout(): void {
     this.loginService.logout();
@@ -21,5 +21,5 @@ export class AppComponent {
   isLoggedIn(): boolean {
     return this.loginService.isLoggedIn();
   }
-  
+
 }

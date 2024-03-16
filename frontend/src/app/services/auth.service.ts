@@ -11,8 +11,8 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-  
+export class AuthService {
+
   private jwtHelper!: JwtHelperService;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
 
@@ -74,48 +74,35 @@ export class LoginService {
     return !!localStorage.getItem(this.JWT_TOKEN);
   }
 
-  canActivate(): boolean {
-    if (this.isLoggedIn()) {
-      // Se l'utente è già autenticato, reindirizza a un'altra rotta
-      this.router.navigate(['/home']);
-      return false;
-    }
-    return true;
-  }
   logout(): void {
     localStorage.removeItem(this.JWT_TOKEN);
     this.loggedUser.next(false);
     this.router.navigate(['/login']);
   }
 
- /* isTokenExpired() {
-    const tokenIsPresent = localStorage.getItem(this.JWT_TOKEN);
-    //se il token non esiste ritorna true e viene reindirizzato alla login 
-    if (!tokenIsPresent) {
+  getAuthToken(): string | null {
+    return localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  isTokenExpired(): boolean {
+    const token: string | null = localStorage.getItem(this.JWT_TOKEN);
+    if (!token) {
+      // Il token non è presente, quindi l'utente non è autenticato
       this.router.navigate(['/login']);
       return true;
     }
-    //altrimenti prende il token 
-    const token = JSON.parse(tokenIsPresent).access_token;
-    //il token viene decodificato 
-    const decoded = this.jwtHelper.decodeToken(token);
-    //verifica se c'è il campo exp, se questo non esiste torna true perchè significa che è scaduto e 
-    //viene indirizzato alla pagina login  
-    if (!decoded.exp){
+
+    // Verifica se il token è scaduto
+    const isExpired = this.jwtHelper.isTokenExpired(token);
+
+    if (isExpired) {
+      // Se il token è scaduto, reindirizza l'utente alla pagina di login
       this.router.navigate(['/login']);
       return true;
     }
-    //controlla se exp è precedente alla data corrente e in caso affermativo ritorna true perchè è scaduto il token
-    //e viene reindirizzato alla login 
-    const expirationDate = decoded.exp * 1000;
-    const now = new Date().getTime();
-    if(expirationDate < now){
-       this.router.navigate(['/login']);
-       return true;
-    }
-    //in caso fosse ancora valido restituisce false
-   return false;
-    
-  }*/
+
+    // Se il token è valido e non scaduto, restituisci false
+    return false;
+  }
 
 }

@@ -1,5 +1,5 @@
 
-import { LoginService } from '../services/login.service';
+import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../services/profile.service';
 import { Component } from '@angular/core';
@@ -18,7 +18,7 @@ export class ProfileComponent {
   selectedFile!: File;
   maxFileSize = 5 * 1024 * 1024; // 5MB for image size upload
 
-  constructor(private loginService: LoginService, 
+  constructor(private loginService: AuthService,
     private ProfileService : ProfileService) { }
 
   ngOnInit(): void {

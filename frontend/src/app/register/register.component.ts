@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
-import { LoginService } from '../services/login.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,13 +10,13 @@ import { LoginService } from '../services/login.service';
   imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
-  
+
 })
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
 
-  constructor(private loginService: LoginService){}
-  
+  constructor(private loginService: AuthService){}
+
   ngOnInit(): void {
     this.registerForm= this.createFormGroup();
   }
