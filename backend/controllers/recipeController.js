@@ -52,5 +52,27 @@ const getRecipe = (req, res) => {
         });
 };
 
+const addRecipe = (req, res) => {
+    // Extract recipe details from the request body
+    const { title, description, instructions, ingredients, prepTime, cookTime, servingSize } = req.body;
+    Recipe.create({
+        title,
+        description,
+        instructions,
+        ingredients,
+        prepTime,
+        cookTime,
+        servingSize,
+        userId: req.userId
+    })
+    .then((newRecipe)=>{
+        res.status(201).json({ message: 'Recipe added successfully', recipe: newRecipe });
+    })
+    .catch((error)=>{
+        console.error('Error adding recipe:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    })
+};
 
-module.exports = { getRecipes, getRecipe };
+
+module.exports = { getRecipes, getRecipe, addRecipe };
