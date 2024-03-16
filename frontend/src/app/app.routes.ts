@@ -4,9 +4,9 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import { LoginComponent } from './login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { AuthService } from './services/auth.service';
 import {NotFoundComponent} from "./not-found/not-found.component";
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
+import {authGuardService} from "./services/authGuard.service";
 
 export const routes: Routes = [
 
@@ -17,14 +17,17 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+    canActivate: [authGuardService],
   },
   {
     path: "profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [authGuardService],
   },
   {
     path:"register",
     component: RegisterComponent,
+    canActivate: [authGuardService]
   },
   {
     path: "recipes",
@@ -34,7 +37,8 @@ export const routes: Routes = [
     path: 'recipeDetails/:id',
     component: RecipeDetailsComponent
   },
-  { path: '**',
+  {
+    path: '**',
     component: NotFoundComponent,
     pathMatch: 'full'
   }
