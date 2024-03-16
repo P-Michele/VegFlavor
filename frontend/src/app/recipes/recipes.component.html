@@ -12,7 +12,7 @@
                 Prep Time: {{ recipe.prepTime }} minutes<br>
                 Cook Time: {{ recipe.cookTime }} minutes<br>
                 Serving Size: {{ recipe.servingSize }}<br><br>
-                <button href="#" [routerLink]="['/recipeDetails', recipe.id]" class="btn btn-success btn-lg">Scopri la ricetta</button>
+                <button href="#" [routerLink]="['/recipeDetails', recipe.id]" class="btn btn-outline-success">Scopri la ricetta</button>
             
         </li>
         Paginated Page: {{ currentPage }} of {{ getTotalPages() }}<br>
@@ -23,7 +23,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item" (click)="prevPage()">
-            <a class="page-link" aria-label="Previous">Previous</a>
+            <a class="page-link" aria-label="Previous">Precedente</a>
         </li>
         <ng-container *ngFor="let item of pageNumbers()">
             <li class="page-item" *ngIf="item === '...'">
@@ -34,7 +34,7 @@
             </li>
         </ng-container>
         <li class="page-item" (click)="nextPage()">
-            <a class="page-link" aria-label="Next">Next</a>
+            <a class="page-link" aria-label="Next">Prossimo</a>
         </li>
     </ul>
 </nav>

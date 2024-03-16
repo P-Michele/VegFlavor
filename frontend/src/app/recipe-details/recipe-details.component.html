@@ -1,13 +1,20 @@
-<div class="card" *ngIf="recipe$ | async as recipe">
-    <div class="card-body">
-      <h3 class="card-title">{{ recipe.title }}</h3>
-      <p class="card-text">{{ recipe.description }}</p>
-      <p class="card-text"><strong>Istruzioni:</strong> {{ recipe.instructions }}</p>
-      <p class="card-text"><strong>Ingredienti:</strong> {{ recipe.ingredients }}</p>
-      <p class="card-text"><strong>Tempo di cottura:</strong> {{ recipe.cookTime }}</p>
-      <p class="card-text"><strong>Tempo di preparazione:</strong> {{ recipe.prepTime }}</p>
-      <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }}</p>
-    </div>
-    <button type="button" class="btn btn-primary-custom" (click)="goToFirstPage()">Torna alla pagina 1 delle ricette</button>
+<!DOCTYPE html>
+<html>
+<h1>Dettagli della ricetta</h1>
 
+<div class="card" *ngIf="recipe$ | async as recipe">
+  <div class="card-body">
+    <h3 class="card-title">{{ recipe.title }}</h3>
+    <p class="card-text">{{ recipe.description }}</p>
+    <p class="card-text"><strong>Istruzioni:</strong> {{ recipe.instructions }}</p>
+    <p class="card-text"><strong>Ingredienti:</strong> {{ recipe.ingredients }}</p>
+    <p class="card-text"><strong>Tempo di cottura:</strong> {{ recipe.cookTime }}</p>
+    <p class="card-text"><strong>Tempo di preparazione:</strong> {{ recipe.prepTime }}</p>
+    <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }}</p>
   </div>
+
+</div>
+<button type="button" class="btn btn-outline-success" (click)="goToFirstPage()">Torna alla pagina 1 delle
+  ricette</button>
+
+</html>
