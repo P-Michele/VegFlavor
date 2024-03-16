@@ -1,18 +1,24 @@
 const express = require("express");
 const cors = require("cors");
-
+const helmet = require("helmet");
+const routes = require("./routes");
+const db = require("./models");
+//helmet, hpp, express rate limit
 const app = express();
 const port = process.env.PORT || 3000;
 
+/* app.use(cors({
+  origin: '*',
+  methods: 'GET,POST',
+  allowedHeaders: 'Content-Type,Authorization'
+})); */
 app.use(cors({origin: 'http://localhost:4200'}));
-
+//app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Middleware to parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
-
-const db = require("./models");
 
 //verifica la connessione
 db.sequelize.authenticate().then(() => {
@@ -24,12 +30,9 @@ db.sequelize.authenticate().then(() => {
 //distrugge e ricrea il database
 db.sequelize.sync({ force: true });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(helmet());
 
-app.use("/api/user", require("./routes/userRoutes"));
-app.use("/api/recipes", require("./routes/recipeRoutes"));
+app.use("/api", routes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
