@@ -30,9 +30,7 @@ export class RegisterComponent implements OnInit{
     })
   }
 
-  register():void {
-    this.loginService
-    .register(this.registerForm.value)
-      .subscribe((msg)=>console.log(msg));
+  register(): void {
+    this.loginService.register(this.registerForm.value);
   }
 }

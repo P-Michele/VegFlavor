@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+
 import { LoginService } from '../services/login.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../services/profile.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { ProfileService } from '../services/profile.service';
 })
 export class ProfileComponent {
 
-  currentUser!: { name: string; id: string; surname: string; email: string; isAdmin: boolean };
+  currentUser!: { name: string; id: number; surname: string; email: string; isAdmin: boolean };
 
   selectedFile!: File;
   maxFileSize = 5 * 1024 * 1024; // 5MB for image size upload

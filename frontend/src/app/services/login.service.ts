@@ -3,9 +3,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user';
 import { BehaviorSubject, Observable, of} from 'rxjs';
 import {first,catchError,tap, map} from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.development';
 import { ErrorHandlerService } from './error-handler.service';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -27,19 +27,19 @@ export class LoginService {
     this.jwtHelper = new JwtHelperService();
   }
 
-  register(user: Omit<User,"id">):  Observable<string>
-    {
-      return this.http.post<{ token: string }>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
+  register(user: Omit<User, 'id'>): void {
+    this.http.post<{ token: string }>(`${environment.apiUrl}/api/user/register`, user, this.httpOptions)
       .pipe(
         first(),
-        map(tokenObject => tokenObject.token),
-        tap(token => {
+        tap(tokenObject => {
+          const token = tokenObject.token;
           localStorage.setItem(this.JWT_TOKEN, token);
           this.loggedUser.next(true);
           this.router.navigate(['/home']);
         }),
-        catchError(this.errorHandlerService.handleError<string>("register"))
-      );
+        catchError(this.errorHandlerService.handleError<void>('register'))
+      )
+      .subscribe();
   }
 
 
@@ -59,7 +59,7 @@ export class LoginService {
     catchError(this.errorHandlerService.handleError<string>("login"))
   );
 }
-  getCurrentUser(token:string): { name: string, id: string,surname:string,email:string,isAdmin:boolean } {
+  getCurrentUser(token:string): { name: string, id: number,surname:string,email:string,isAdmin:boolean } {
     const decodedToken = this.jwtHelper.decodeToken(token);
     return {
       id: decodedToken.Id,
@@ -74,6 +74,14 @@ export class LoginService {
     return !!localStorage.getItem(this.JWT_TOKEN);
   }
 
+  canActivate(): boolean {
+    if (this.isLoggedIn()) {
+      // Se l'utente è già autenticato, reindirizza a un'altra rotta
+      this.router.navigate(['/home']);
+      return false;
+    }
+    return true;
+  }
   logout(): void {
     localStorage.removeItem(this.JWT_TOKEN);
     this.loggedUser.next(false);
