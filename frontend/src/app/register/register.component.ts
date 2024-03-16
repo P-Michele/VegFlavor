@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
 
-  constructor(private loginService: AuthService){}
+  constructor(private authService: AuthService){}
 
   ngOnInit(): void {
     this.registerForm= this.createFormGroup();
@@ -31,6 +31,6 @@ export class RegisterComponent implements OnInit{
   }
 
   register(): void {
-    this.loginService.register(this.registerForm.value);
+    this.authService.register(this.registerForm.value);
   }
 }

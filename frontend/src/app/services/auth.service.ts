@@ -80,10 +80,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getAuthToken(): string | null {
-    return localStorage.getItem(this.JWT_TOKEN);
-  }
-
   isTokenExpired(): boolean {
     const token: string | null = localStorage.getItem(this.JWT_TOKEN);
     if (!token) {
