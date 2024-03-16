@@ -64,7 +64,8 @@ const loginUser = (req, res) => {
             Id: user.id,
             Name: user.name,
             Surname: user.surname,
-            Email: user.email
+            Email: user.email,
+            IsAdmin: user.isAdmin
           }, jwtConfig.secret, { expiresIn: jwtConfig.exp });
 
           // Send token to client
