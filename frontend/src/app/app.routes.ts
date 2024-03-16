@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path:"register",
     component: RegisterComponent,
-    canActivate: [LoginService]
+    canActivate: [AuthService]
   },
   {
     path: "recipes",
