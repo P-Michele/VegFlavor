@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Recipe } from '../models/recipe';
 import { RecipesService } from '../services/recipes.service';
-import { discardPeriodicTasks } from '@angular/core/testing';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable} from 'rxjs';
 
 
 @Component({
@@ -17,10 +16,9 @@ import { Observable, map } from 'rxjs';
 })
 export class RecipesComponent implements OnInit {
 
-
-  currentPage: number = 1;
-  pageSize: number = 2;
-  recipes$!: Observable<{ recipes: Recipe[], totalPages: number }>;
+  currentPage!: number ;
+  pageSize!: number;
+  recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number }>;
   totalPages!:number;
 
   constructor(private recipesService: RecipesService,private router:Router) { }
@@ -33,6 +31,8 @@ export class RecipesComponent implements OnInit {
     this.recipes$ = this.recipesService.getRecipes(currentPage, pageSize);
     this.recipes$.subscribe(data => {
       this.totalPages = data.totalPages;
+      this.currentPage=data.page;
+      this.pageSize=data.pageSize;
     });
   }
 

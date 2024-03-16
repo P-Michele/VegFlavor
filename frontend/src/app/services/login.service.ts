@@ -88,7 +88,7 @@ export class LoginService {
     this.router.navigate(['/login']);
   }
 
-  isTokenExpired() {
+ /* isTokenExpired() {
     const tokenIsPresent = localStorage.getItem(this.JWT_TOKEN);
     //se il token non esiste ritorna true e viene reindirizzato alla login 
     if (!tokenIsPresent) {
@@ -116,6 +116,6 @@ export class LoginService {
     //in caso fosse ancora valido restituisce false
    return false;
     
-  }
+  }*/
 
 }

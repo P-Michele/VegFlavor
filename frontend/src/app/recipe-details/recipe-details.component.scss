@@ -1,0 +1,19 @@
+/* Aggiungi questo codice nel tuo file CSS */
+.btn-primary-custom {
+    background-color: green; /* Imposta il colore di sfondo del pulsante */
+    color: white; /* Imposta il colore del testo del pulsante */
+    font-size: 14px; /* Imposta la dimensione del carattere */
+    padding: 6px 12px; /* Imposta il padding interno del pulsante */
+    border: none; /* Rimuovi il bordo del pulsante */
+    border-radius: 4px; /* Imposta il bordo arrotondato del pulsante */
+    cursor: pointer; /* Cambia il cursore quando si passa sopra il pulsante */
+  }
+  
+  .btn-primary-custom:hover {
+    background-color: darkgreen; /* Cambia il colore di sfondo del pulsante al passaggio del mouse */
+  }
+  /* CSS per rendere il pulsante più stretto */
+.btn-primary-custom {
+    padding: 6px 12px; /* Imposta il padding interno del pulsante */
+  }
+  

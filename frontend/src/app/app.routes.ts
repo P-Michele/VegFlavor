@@ -5,6 +5,7 @@ import {RegisterComponent} from "./register/register.component";
 import { LoginComponent } from './login/login.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { LoginService } from './services/login.service';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 
 export const routes: Routes = [
 
@@ -23,11 +24,16 @@ export const routes: Routes = [
   },
   {
     path:"register",
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [LoginService] 
   },
   {
     path: "recipes",
     component: RecipesComponent
+  },
+  {
+    path: 'recipeDetails/:id',
+    component: RecipeDetailsComponent
   },
   { path: '**',
     redirectTo: 'home',
