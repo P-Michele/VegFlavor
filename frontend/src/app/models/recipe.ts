@@ -1,10 +1,22 @@
-export interface Recipe{
-    id:number;
-    title: string;
-    description: string;
-    instructions: string;
-    ingredients: string;
-    prepTime: number;
-    cookTime: number;
-    servingSize:number;
+export class Recipe {
+  id: number | undefined;
+  title: string;
+  description: string;
+  instructions: string;
+  ingredients: string[];
+  quantities: number[];
+  prepTime: number;
+  cookTime: number;
+  servingSize: number;
+
+  constructor(){
+    this.title = '';
+    this.description = '';
+    this.instructions = '';
+    this.quantities = [];
+    this.ingredients = [];
+    this.prepTime = 0;
+    this.cookTime = 0;
+    this.servingSize = 0;
+  }
 }

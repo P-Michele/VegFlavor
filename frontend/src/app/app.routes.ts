@@ -7,9 +7,14 @@ import { RecipesComponent } from './recipes/recipes.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import {authGuardService} from "./services/authGuard.service";
+import {CreateRecipeComponent} from "./create-recipe/create-recipe.component";
 
 export const routes: Routes = [
 
+  {
+    path: "",
+    component: HomeComponent
+  },
   {
     path: "home",
     component: HomeComponent
@@ -36,6 +41,10 @@ export const routes: Routes = [
   {
     path: 'recipeDetails/:id',
     component: RecipeDetailsComponent
+  },
+  {
+    path: 'add/recipe',
+    component: CreateRecipeComponent
   },
   {
     path: '**',

@@ -1,1 +1,97 @@
-<!DOCTYPE html>
+<!-- recipe-form.component.html -->
+<section class="bg-light py-3 py-md-5">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h2 class="mb-4 display-5 text-center">Aggiungi la tua ricetta!</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-lg-center">
+      <div class="col-12 col-lg-9">
+        <div class="bg-white border rounded shadow-sm overflow-hidden">
+
+          <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+            <div class="row gy-4 gy-xl-5 p-4">
+
+              <div class="col-12">
+                <label for="fullname" class="form-label">Nome<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-receipt"></i>
+                  </span>
+                  <input type="text" class="form-control" id="fullname" name="fullname" [(ngModel)]="recipe.title" required>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="description" class="form-label">Descrizione<span class="text-danger">*</span></label>
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="recipe.description" rows="3" required></textarea>
+              </div>
+
+              <div class="col-12">
+                <div class="row gy-4">
+                  <div class="input-group mb-3 col">
+                    <input type="text" class="form-control" placeholder="Ingrediente" aria-label="Ingrediente" [(ngModel)]="ingredient" name="ingredient">
+                    <input type="number" class="form-control" placeholder="Quantità" aria-label="Quantità" [(ngModel)]="quantity" name="quantity">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addIngredient()">Aggiungi</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="instructions" class="form-label">Istruzioni<span class="text-danger">*</span></label>
+                <textarea class="form-control" id="instructions" name="instructions" [(ngModel)]="recipe.instructions" rows="3" required></textarea>
+              </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="prepTime" class="form-label">Tempo di preparazione (minuti)</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="bi bi-clock"></i>
+                      </span>
+                    <input type="number" class="form-control" id="prepTime" name="prepTime" [(ngModel)]="recipe.prepTime">
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="cookTime" class="form-label">Tempo di cottura (minuti)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <input type="number" class="form-control" id="cookTime" name="cookTime" [(ngModel)]="recipe.cookTime">
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="servingSize" class="form-label">Dimensione porzione</label>
+                  <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                    <input type="number" class="form-control" id="servingSize" name="servingSize" [(ngModel)]="recipe.servingSize">
+                  </div>
+                </div>
+
+              <div class="col-12 col-md-6">
+                <label for="recipeImage" class="form-label">Immagine della ricetta</label>
+                <div class="input-group">
+                  <input type="file" class="form-control" id="recipeImage" name="recipeImage">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="d-grid">
+                  <button class="btn btn-success btn-lg" type="submit">Invia Ricetta</button>
+                </div>
+              </div>
+            </div> <!-- ROW END -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
