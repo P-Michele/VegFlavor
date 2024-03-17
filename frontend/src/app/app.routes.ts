@@ -43,8 +43,9 @@ export const routes: Routes = [
     component: RecipeDetailsComponent
   },
   {
-    path: 'add/recipe',
-    component: CreateRecipeComponent
+    path: 'createRecipe',
+    component: CreateRecipeComponent,
+     canActivate: [authGuardService]
   },
   {
     path: '**',

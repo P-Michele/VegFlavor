@@ -15,17 +15,15 @@
         <li class="nav-item">
           <a *ngIf="!isLoggedIn()" class="nav-link text-success" [routerLink]="'register'" >Registrati</a>
         </li>
-        <li class="nav-item dropdown">
-          <a *ngIf="isLoggedIn()" class="nav-link dropdown-toggle text-success" role="button"
+        <li class="nav-item dropdown" *ngIf="isLoggedIn()">
+          <a  class="nav-link dropdown-toggle text-success" role="button"
              data-bs-toggle='dropdown' aria-expanded="false">
             <i class="bi bi-person-fill"></i> Profilo </a>
-          <!-- Dropdown menu -->
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li *ngIf="isLoggedIn()">
+            <li >
               <a class="dropdown-item text-success" [routerLink]="'profile'"> Account </a>
             </li>
-            <li *ngIf="isLoggedIn()">
-              <!-- Aggiungi un evento click che chiama la funzione di logout -->
+            <li >
               <a class="dropdown-item text-success" (click)="logout()">Log out</a>
           </li>
           </ul>

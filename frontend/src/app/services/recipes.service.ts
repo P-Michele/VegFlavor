@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { Recipe } from '../models/recipe';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { AuthService } from './auth.service';
+import { ErrorHandlerService } from './error-handler.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private router:Router ,private http: HttpClient,private authService:AuthService,private errorHandlerService: ErrorHandlerService) { }
 
-  getRecipes(page: number, pageSize: number): Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number }> {
-    const url = `${environment.apiUrl}/api/recipes?page=${page}&pageSize=${pageSize}`;
+  getRecipes(page: number): Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number }> {
+    const url = `${environment.apiUrl}/api/recipes?page=${page}`;
     return this.http.get<any>(url);
   }
   
@@ -20,4 +23,5 @@ export class RecipesService {
     const url = `${environment.apiUrl}/api/recipes/${id}`;
     return this.http.get<Recipe>(url);
   }
+
 }

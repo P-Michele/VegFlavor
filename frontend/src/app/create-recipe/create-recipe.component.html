@@ -35,10 +35,18 @@
                 <div class="row gy-4">
                   <div class="input-group mb-3 col">
                     <input type="text" class="form-control" placeholder="Ingrediente" aria-label="Ingrediente" [(ngModel)]="ingredient" name="ingredient">
-                    <input type="number" class="form-control" placeholder="Quantità" aria-label="Quantità" [(ngModel)]="quantity" name="quantity">
+                    <input type="number" class="form-control" placeholder="Quantità" aria-label="Quantità" [(ngModel)]="quantity" name="quantity" min="1" required>
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="addIngredient()">Aggiungi</button>
                   </div>
                 </div>
+              </div>
+              <div class="col-12">
+                <ul class="list-group">
+                  <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item">
+                    {{ ingredient }} - {{ recipe.quantities[i] }}
+                    <button class="btn btn-danger btn-sm" (click)="removeIngredient(i)">Rimuovi</button>
+                  </li>
+                </ul>
               </div>
 
               <div class="col-12">
@@ -52,7 +60,7 @@
                       <span class="input-group-text">
                         <i class="bi bi-clock"></i>
                       </span>
-                    <input type="number" class="form-control" id="prepTime" name="prepTime" [(ngModel)]="recipe.prepTime">
+                    <input type="number" class="form-control" id="prepTime" name="prepTime" [(ngModel)]="recipe.prepTime" min="1" required>
                   </div>
                 </div>
 
@@ -62,7 +70,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-clock"></i>
                     </span>
-                    <input type="number" class="form-control" id="cookTime" name="cookTime" [(ngModel)]="recipe.cookTime">
+                    <input type="number" class="form-control" id="cookTime" name="cookTime" [(ngModel)]="recipe.cookTime" min="1" required>
                   </div>
                 </div>
 
@@ -72,16 +80,16 @@
                   <span class="input-group-text">
                     <i class="bi bi-person"></i>
                   </span>
-                    <input type="number" class="form-control" id="servingSize" name="servingSize" [(ngModel)]="recipe.servingSize">
+                    <input type="number" class="form-control" id="servingSize" name="servingSize" [(ngModel)]="recipe.servingSize" min="1" required>
                   </div>
                 </div>
-
+<!--
               <div class="col-12 col-md-6">
                 <label for="recipeImage" class="form-label">Immagine della ricetta</label>
                 <div class="input-group">
                   <input type="file" class="form-control" id="recipeImage" name="recipeImage">
                 </div>
-              </div>
+              </div>-->
 
               <div class="col-12">
                 <div class="d-grid">

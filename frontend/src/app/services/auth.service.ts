@@ -15,6 +15,7 @@ export class AuthService {
 
   private jwtHelper!: JwtHelperService;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
+  userId!: Pick<User, "id">;
 
   loggedUser= new BehaviorSubject<boolean>(false);
 

@@ -20,15 +20,16 @@ export class RecipesComponent implements OnInit {
   pageSize!: number;
   recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number }>;
   totalPages!:number;
+  recipe!: Recipe;
 
   constructor(private recipesService: RecipesService,private router:Router) { }
 
   ngOnInit(): void {
-    this.getRecipes(this.currentPage, this.pageSize);
+    this.getRecipes(this.currentPage);
   }
 
-  getRecipes(currentPage: number, pageSize: number): void {
-    this.recipes$ = this.recipesService.getRecipes(currentPage, pageSize);
+  getRecipes(currentPage: number): void {
+    this.recipes$ = this.recipesService.getRecipes(currentPage);
     this.recipes$.subscribe(data => {
       this.totalPages = data.totalPages;
       this.currentPage=data.page;
@@ -39,24 +40,24 @@ export class RecipesComponent implements OnInit {
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.getRecipes(this.currentPage, this.pageSize);
-      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
+      this.getRecipes(this.currentPage);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage} });
     }
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.getRecipes(this.currentPage, this.pageSize);
-      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
+      this.getRecipes(this.currentPage);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage} });
     }
   }
 
   goToPage(pageNumber: number): void {
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.currentPage = pageNumber;
-      this.getRecipes(this.currentPage, this.pageSize);
-      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage, pageSize: this.pageSize } });
+      this.getRecipes(this.currentPage);
+      this.router.navigate(['/recipes'], { queryParams: { page: this.currentPage } });
     }
   }
 
