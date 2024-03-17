@@ -3,14 +3,10 @@ const bcrypt = require('bcrypt');
 const db = require('../models');
 const User = db.users;
 const jwtConfig = require("../configs/jwtConfig");
+const {matchedData} = require("express-validator");
 
 const registerUser = (req, res) => {
-  const { name, surname, email, password } = req.body;
-
-  if (!name || !surname || !email || !password) {
-    return res.status(400).json({ message: 'Please fill all fields' });
-  }
-
+  const { name, surname, email, password } = matchedData(req);
   User.findOne({ where: { email } })
     .then(user => {
       if (user) {
@@ -44,7 +40,7 @@ const registerUser = (req, res) => {
 
 
 const loginUser = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = matchedData(req);
 
   User.findOne({ where: { email } })
     .then(user => {

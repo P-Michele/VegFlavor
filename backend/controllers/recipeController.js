@@ -1,13 +1,11 @@
 const db = require('../models');
 const Recipe = db.recipes;
+const {matchedData} = require("express-validator");
 
 const getRecipes = (req, res) => {
-
-    const page = parseInt(req.query.page) || 1;
+    const page = matchedData(req, { includeOptionals: true }).page || 1;
     const pageSize = 5;
-    if (page <= 0) {
-        return res.status(400).json({ message: 'Invalid page value' });
-    }
+
     const offset = (page - 1) * pageSize;
     Recipe.findAndCountAll({
         limit: pageSize,
@@ -37,7 +35,7 @@ const getRecipes = (req, res) => {
 };
 
 const getRecipe = (req, res) => {
-    const recipeId = req.params.id;
+    const {recipeId} = matchedData(req);
 
     Recipe.findByPk(recipeId)
         .then(recipe => {
@@ -53,8 +51,7 @@ const getRecipe = (req, res) => {
 };
 
 const addRecipe = (req, res) => {
-    // Extract recipe details from the request body
-    const { title, description, instructions, ingredients, prepTime, cookTime, servingSize } = req.body;
+    const { title, description, instructions, ingredients, prepTime, cookTime, servingSize } = matchedData(req);
     Recipe.create({
         title,
         description,
