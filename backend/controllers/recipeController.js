@@ -35,14 +35,13 @@ const getRecipes = (req, res) => {
 };
 
 const getRecipe = (req, res) => {
-    const {recipeId} = matchedData(req);
-
-    Recipe.findByPk(recipeId)
+    const {id} = matchedData(req);
+    Recipe.findByPk(id)
         .then(recipe => {
             if (!recipe) {
                 return res.status(404).json({ message: "Recipe not found" }); // If recipe not found, return 404 status
             }
-            res.json(recipe);
+            res.status(200).json(recipe);
         })
         .catch(error => {
             console.error("Error fetching recipe:", error);
@@ -52,11 +51,15 @@ const getRecipe = (req, res) => {
 
 const addRecipe = (req, res) => {
     const { title, description, instructions, ingredients, prepTime, cookTime, servingSize } = matchedData(req);
+    const selectedIngredients = ingredients.map(item => ({
+        name: item.name,
+        quantity: item.quantity
+      }));
     Recipe.create({
         title,
         description,
         instructions,
-        ingredients,
+        ingredients: selectedIngredients,
         prepTime,
         cookTime,
         servingSize,

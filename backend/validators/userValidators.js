@@ -3,25 +3,29 @@ const {validationErrorHandler} = require("../middlewares/validationResultMiddlew
 
 const loginUserValidator = [
     body('email')
+        .isString().withMessage('Email must be a string')
         .trim()
-        .notEmpty().withMessage('Email is required')
+        .notEmpty().withMessage('Email cannot be empty')
         .isEmail().withMessage('Invalid email address')
         .normalizeEmail()
         .escape(),
     body('password')
-        .notEmpty().withMessage('Password is required')
+        .isString().withMessage('Password must be a string')
+        .notEmpty().withMessage('Password cannot be empty')
         .isStrongPassword().withMessage('Weak password'),
     validationErrorHandler
 ];
 
 const registerUserValidator = [
     body('name')
+        .isString().withMessage('Name must be string')
         .trim()
-        .notEmpty().withMessage('Name is required')
+        .notEmpty().withMessage('Name cannot be empty')
         .escape(),
     body('surname')
+        .isString().withMessage('Surname must be string')
         .trim()
-        .notEmpty().withMessage('Surname is required')
+        .notEmpty().withMessage('Surname cannot be empty')
         .escape(),
     loginUserValidator
 ];

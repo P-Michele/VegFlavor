@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
           allowNull: false
         },
         ingredients: {
-          type: DataTypes.TEXT,
+          type: DataTypes.JSON,
           allowNull: false
         },
         prepTime: {
