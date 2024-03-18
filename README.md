@@ -19,8 +19,8 @@ Per lo sviluppo del lato frontend è stato utilizzato Angular17, nel particolare
 - inoltre sono state utilizzate angular/common, angular/route e angular/forms per permettere le varie funzionalità del sito
  
 #### Backend
-Per lo sviluppo del lato backend è stato utilizzato node.js con express mentre per la persistenza dei dati sequelize che è
-un orm per mysql.
+Per lo sviluppo del lato backend è stato utilizzato node.js con express mentre per la persistenza dei dati un db mysql
+utilizzato tramite l'orm sequelize.
 Per la sicurezza sono state utilizzate le seguenti librerie:
 - express-validator con la funzione escape() per l'encoding dei caratteri speciali dell'html
 - hpp per impedire http parameter pollution
@@ -31,6 +31,5 @@ Per la sicurezza sono state utilizzate le seguenti librerie:
 - cors è abilitato con origine permessa solo il frontend
   
 Il file index.js è il file che fa partire il backend.
-Viene utilizzato un db per il salvataggio delle ricette e degli utenti, è stato utilizzato MySql. Il database viene configurato utilizzando un file .env 
 ### Componenti
 Belenchia Valerio, Dottori Edoardo, Perini Michele, Santolini Alice
