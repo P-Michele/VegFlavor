@@ -22,18 +22,18 @@ export class CreateRecipeComponent {
   ingredient: string = '';
   quantity: number = 0;
 
-  addIngredient() {
+  /*addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
       this.recipe.ingredients.push(this.ingredient);
       this.recipe.quantities.push(this.quantity);
       this.ingredient = '';
       this.quantity = 0;
     }
-  }
+  }*/
 
   removeIngredient(index: number) {
     this.recipe.ingredients.splice(index, 1); 
-    this.recipe.quantities.splice(index, 1); 
+    //this.recipe.quantities.splice(index, 1); 
   }
 
  onSubmit(recipeForm: NgForm) {}

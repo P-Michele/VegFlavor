@@ -3,7 +3,7 @@ export class Recipe {
   title: string;
   description: string;
   instructions: string;
-  ingredients: string[];
+  ingredients: { name: string, quantity: number }[];
   quantities: number[];
   prepTime: number;
   cookTime: number;
