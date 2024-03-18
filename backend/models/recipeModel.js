@@ -32,7 +32,11 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         servingSize: {
           type: DataTypes.INTEGER,
           allowNull: false
-        }
+        },
+        imagePath: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
       },
       {
         timestamps: true

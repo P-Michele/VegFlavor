@@ -50,7 +50,7 @@ const getRecipe = (req, res) => {
 };
 
 const addRecipe = (req, res) => {
-    const { title, description, instructions, ingredients, prepTime, cookTime, servingSize } = matchedData(req);
+    const { title, description, instructions, ingredients, prepTime, cookTime, servingSize} = matchedData(req);
     const selectedIngredients = ingredients.map(item => ({
         name: item.name,
         quantity: item.quantity
@@ -63,6 +63,7 @@ const addRecipe = (req, res) => {
         prepTime,
         cookTime,
         servingSize,
+        imagePath: req.file.path,
         userId: req.userId
     })
     .then((newRecipe)=>{
