@@ -1,9 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const hpp=require("hpp");
 const routes = require("./routes");
 const db = require("./models");
-//helmet, hpp, express rate limit
+const { rateLimit } = require('express-rate-limit');
+const path = require('path');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -30,7 +33,18 @@ db.sequelize.authenticate().then(() => {
 //distrugge e ricrea il database
 db.sequelize.sync({ force: true });
 
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.'
+});
+app.use(limiter);
 app.use(helmet());
+app.use(hpp());
+
+
+// Serve static files (images)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/api", routes);
 
