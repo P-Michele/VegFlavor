@@ -2,10 +2,7 @@
 
 ## Sito web di ricette vegane
 ### Descrizione 
-Il progetto sviluppato è una piattaforma di condivisione delle ricette vegane. 
-E' stato sviluppato un sito web denominato VegFlavor che permette di visualizzare le ricette e di poter interagire inserendone di nuove.
-Il progetto è stato realizzato in formato SPA. 
-Nel progetto come porta per la connessione del backend viene utilizzata la 3000 impostata nella componente environment del frontend
+Il progetto sviluppato è una SPA di condivisione delle ricette vegane
 ### Funzionalità
 Questo sito (ancora in via di sviluppo) permette:
 - Registrare ed autenticare un nuovo utente
