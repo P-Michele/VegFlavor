@@ -13,7 +13,7 @@
       <div class="col-12 col-lg-9">
         <div class="bg-white border rounded shadow-sm overflow-hidden">
 
-          <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+          <form (ngSubmit)="onSubmit()">
             <div class="row gy-4 gy-xl-5 p-4">
 
               <div class="col-12">
@@ -43,7 +43,7 @@
               <div class="col-12">
                 <ul class="list-group">
                   <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item">
-                    {{ ingredient }} - {{ recipe.quantities[i] }}
+                    {{ ingredient.name }} - {{ ingredient.quantity }}
                     <button class="btn btn-danger btn-sm" (click)="removeIngredient(i)">Rimuovi</button>
                   </li>
                 </ul>
@@ -90,12 +90,18 @@
                   <input type="file" class="form-control" id="recipeImage" name="recipeImage">
                 </div>
               </div>-->
+              <div class="form-group">
+                <label for="file">Seleziona un file</label>
+                <input type="file" class="form-control-file p-1" id="file" name="file" accept="image/jpeg, image/png"
+                       [(ngModel)]="recipe.selectedFile" required>
+              </div>
 
               <div class="col-12">
                 <div class="d-grid">
                   <button class="btn btn-success btn-lg" type="submit">Invia Ricetta</button>
                 </div>
               </div>
+
             </div> <!-- ROW END -->
           </form>
         </div>

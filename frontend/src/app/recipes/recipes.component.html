@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <title>Tutte le Ricette</title>
 
 <h2>Ricette</h2>
@@ -8,7 +7,12 @@
         <li *ngFor="let recipe of (recipes$ | async)?.recipes">
                 <strong>{{ recipe.title }}</strong>: {{ recipe.description }}<br>
                 Instructions: {{ recipe.instructions }}<br>
-                Ingredients: {{ recipe.ingredients }}<br>
+                Ingredients:
+            <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">
+                    {{ ingredient.name }}: {{ ingredient.quantity }}
+                </li>
+            </ul>
                 Prep Time: {{ recipe.prepTime }} minutes<br>
                 Cook Time: {{ recipe.cookTime }} minutes<br>
                 Serving Size: {{ recipe.servingSize }}<br><br>
@@ -20,7 +24,7 @@
     </ul>
 </div>
 
-
+<!--
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item" (click)="prevPage()">
@@ -39,5 +43,24 @@
         </li>
     </ul>
 </nav>
+-->
 
-</html>
+<nav aria-label="Page navigation example">
+    <ul class="pagination active">
+      <li class="page-item" (click)="prevPage()">
+        <a class="page-link" aria-label="Previous">Precedente</a>
+      </li>
+      <ng-container *ngFor="let item of pageNumbers()">
+        <li class="page-item" *ngIf="item === '...'">
+            <a class="page-link">...</a>
+        </li>
+        <li class="page-item " *ngIf="item !== '...'">
+            <a class="page-link" (click)="goToPage(+item)" [class.active]="currentPage === item">{{ item }}</a>
+        </li>
+    </ng-container>
+      <li class="page-item" (click)="nextPage()">
+        <a class="page-link">Prossimo</a>
+      </li>
+    </ul>
+  </nav>
+  

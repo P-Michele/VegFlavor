@@ -7,7 +7,12 @@
     <h3 class="card-title">{{ recipe.title }}</h3>
     <p class="card-text">{{ recipe.description }}</p>
     <p class="card-text"><strong>Istruzioni:</strong> {{ recipe.instructions }}</p>
-    <p class="card-text"><strong>Ingredienti:</strong> {{ recipe.ingredients }}</p>
+    Ingredients:
+    <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+            {{ ingredient.name }}: {{ ingredient.quantity }}
+        </li>
+    </ul>
     <p class="card-text"><strong>Tempo di cottura:</strong> {{ recipe.cookTime }}</p>
     <p class="card-text"><strong>Tempo di preparazione:</strong> {{ recipe.prepTime }}</p>
     <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }}</p>

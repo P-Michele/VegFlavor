@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { Recipe } from '../models/recipe';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule} from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable} from 'rxjs';
 
 
@@ -16,16 +16,23 @@ import { Observable} from 'rxjs';
 })
 export class RecipesComponent implements OnInit {
 
-  currentPage!: number ;
   pageSize!: number;
-  recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number }>;
+  recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number,totalRecipes:number }>;
   totalPages!:number;
   recipe!: Recipe;
+  currentPage!: number;
 
-  constructor(private recipesService: RecipesService,private router:Router) { }
+  constructor(
+    private recipesService: RecipesService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getRecipes(this.currentPage);
+    this.activatedRoute.queryParams.subscribe(params => {
+      const initialPage = params['page'] ? Number(params['page']) : 1;
+      this.getRecipes(initialPage);
+    });
   }
 
   getRecipes(currentPage: number): void {
