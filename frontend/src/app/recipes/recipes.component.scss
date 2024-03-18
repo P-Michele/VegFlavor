@@ -29,13 +29,24 @@
   #pagination {
     text-align: center;
   }
- // bootrsap method to change the color of the active page
-  a.page-link.active {
-    background-color: forestgreen;
-    color: white;
-  }
 
-  a.page-link {
-    color: black;
+  .page-item {
+    .page-link {
+      cursor: pointer;
+      color: green;
+      &.colored {
+        background-color: forestgreen;
+        color: rgb(6, 231, 85);
+      }
+    }
   }
 }
+
+.page-item.active {
+  .page-link {
+    background-color: rgb(44, 216, 44);
+    color: rgb(6, 231, 85);
+  }
+}
+
+

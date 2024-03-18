@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <title>Tutte le Ricette</title>
 
 <h2>Ricette</h2>
@@ -25,7 +24,7 @@
     </ul>
 </div>
 
-
+<!--
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item" (click)="prevPage()">
@@ -44,5 +43,24 @@
         </li>
     </ul>
 </nav>
+-->
 
-</html>
+<nav aria-label="Page navigation example">
+    <ul class="pagination active">
+      <li class="page-item" (click)="prevPage()">
+        <a class="page-link" aria-label="Previous">Precedente</a>
+      </li>
+      <ng-container *ngFor="let item of pageNumbers()">
+        <li class="page-item" *ngIf="item === '...'">
+            <a class="page-link">...</a>
+        </li>
+        <li class="page-item " *ngIf="item !== '...'">
+            <a class="page-link" (click)="goToPage(+item)" [class.active]="currentPage === item">{{ item }}</a>
+        </li>
+    </ng-container>
+      <li class="page-item" (click)="nextPage()">
+        <a class="page-link">Prossimo</a>
+      </li>
+    </ul>
+  </nav>
+  
