@@ -9,33 +9,37 @@ import { CommonModule } from '@angular/common';
   selector: 'app-create-recipe',
   standalone: true,
   imports: [
-    FormsModule,RouterLink,CommonModule
+    FormsModule, RouterLink, CommonModule
   ],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.scss'
 })
-export class CreateRecipeComponent {
 
-  constructor(private recipesService:RecipesService) {}
+export class CreateRecipeComponent {
 
   recipe: Recipe = new Recipe();
   ingredient: string = '';
-  quantity: number = 0;
+  quantity !: number;
 
-  /*addIngredient() {
+  constructor(private recipesService:RecipesService) {}
+
+  addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
-      this.recipe.ingredients.push(this.ingredient);
-      this.recipe.quantities.push(this.quantity);
+      const newIngredient = { name: this.ingredient, quantity: this.quantity };
+      this.recipe.ingredients.push(newIngredient);
       this.ingredient = '';
       this.quantity = 0;
     }
-  }*/
-
-  removeIngredient(index: number) {
-    this.recipe.ingredients.splice(index, 1); 
-    //this.recipe.quantities.splice(index, 1); 
   }
 
- onSubmit(recipeForm: NgForm) {}
+  removeIngredient(index: number) {
+    this.recipe.ingredients.splice(index, 1);
+  }
+
+ onSubmit() {
+    let formData = new FormData();
+    formData.set("recipe" ,JSON.stringify(this.recipe));
+    console.log(formData);
+ }
 
 }
