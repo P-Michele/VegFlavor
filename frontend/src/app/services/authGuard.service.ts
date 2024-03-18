@@ -12,9 +12,10 @@ export const authGuardService:  CanActivateFn = (
   if((path.includes("login") || path.includes("register")) && inject(AuthService).isLoggedIn())
     return inject(Router).createUrlTree(['/home']);
 
-  if(route.toString().includes("profile") && !(inject(AuthService).isLoggedIn()) && (inject(AuthService).isTokenExpired()))
-    return inject(Router).createUrlTree(['/login']);
+  if(!(inject(AuthService).isLoggedIn())){
+    if(route.toString().includes("profile") || route.toString().includes("createRecipe"))
+      return inject(Router).createUrlTree(['/login']);
+  }
 
   return true;
-  
 };

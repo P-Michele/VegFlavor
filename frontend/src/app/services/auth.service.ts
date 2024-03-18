@@ -15,9 +15,6 @@ export class AuthService {
 
   private jwtHelper!: JwtHelperService;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
-  userId!: Pick<User, "id">;
-
-  loggedUser= new BehaviorSubject<boolean>(false);
 
   httpOptions: {headers: HttpHeaders}={
     headers: new HttpHeaders({"Content-Type":"application/json"})
@@ -35,7 +32,6 @@ export class AuthService {
         tap(tokenObject => {
           const token = tokenObject.token;
           localStorage.setItem(this.JWT_TOKEN, token);
-          this.loggedUser.next(true);
           this.router.navigate(['/home']);
         }),
         catchError(this.errorHandlerService.handleError<void>('register'))
@@ -54,30 +50,26 @@ export class AuthService {
     map(tokenObject => tokenObject.token),
     tap(token => {
       localStorage.setItem(this.JWT_TOKEN, token);
-      this.loggedUser.next(true);
       this.router.navigate(['/home']);
     }),
     catchError(this.errorHandlerService.handleError<string>("login"))
   );
 }
-  getCurrentUser(token:string): { name: string, id: number,surname:string,email:string,isAdmin:boolean } {
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    return {
-      id: decodedToken.Id,
-      name: decodedToken.Name,
-      surname: decodedToken.Surname,
-      email:decodedToken.Email,
-      isAdmin:decodedToken.IsAdmin
-    };
+  getCurrentUser(): User | null {
+    let token = localStorage.getItem(this.JWT_TOKEN);
+    if(token){
+      let decodedToken = this.jwtHelper.decodeToken(token);
+      return new User(decodedToken.Id, decodedToken.Name, decodedToken.Surname, decodedToken.Email);
+    }
+    return null;
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem(this.JWT_TOKEN);
+    return !!localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
   }
 
   logout(): void {
     localStorage.removeItem(this.JWT_TOKEN);
-    this.loggedUser.next(false);
     this.router.navigate(['/login']);
   }
 
@@ -98,7 +90,6 @@ export class AuthService {
       return true;
     }
 
-    // Se il token è valido e non scaduto, restituisci false
     return false;
   }
 

@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../services/profile.service';
 import { Component } from '@angular/core';
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
-  currentUser!: { name: string; id: number; surname: string; email: string; isAdmin: boolean };
+  currentUser: User = new User(-1, '', '', '');
 
   selectedFile!: File;
   maxFileSize = 5 * 1024 * 1024; // 5MB for image size upload
@@ -22,9 +23,9 @@ export class ProfileComponent {
     private ProfileService : ProfileService) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('JWT_TOKEN');
-    if (token) {
-      this.currentUser = this.loginService.getCurrentUser(token);
+    const user = this.loginService.getCurrentUser();
+    if (user !== null) {
+      this.currentUser = user;
     }
   }
 
