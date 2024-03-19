@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {Recipe} from "../models/recipe";
-import { RecipesService } from '../services/recipes.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-create-recipe',
@@ -21,7 +22,7 @@ export class CreateRecipeComponent {
   ingredient: string = '';
   quantity !: number;
 
-  constructor(private recipesService:RecipesService) {}
+  constructor(private http:HttpClient) {}
 
   addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
@@ -32,14 +33,22 @@ export class CreateRecipeComponent {
     }
   }
 
+  selectFile(event: any): void {
+    this.recipe.selectedFile = event.target.files.item(0);
+  }
+
+
   removeIngredient(index: number) {
     this.recipe.ingredients.splice(index, 1);
   }
 
  onSubmit() {
     let formData = new FormData();
-    formData.set("recipe" ,JSON.stringify(this.recipe));
-    console.log(formData);
+    formData.append("image", this.recipe.selectedFile);
+    formData.append("recipeData" ,JSON.stringify(this.recipe));
+
+     console.log(formData,this.recipe);
+     console.log(this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe());
  }
 
 }
