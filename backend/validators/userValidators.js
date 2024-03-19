@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const {validationErrorHandler} = require("../middlewares/validationResultMiddleware");
+const {validationErrorHandler} = require("./validationResultHandler");
 
 const loginUserValidator = [
     body('email')
