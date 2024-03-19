@@ -15,7 +15,6 @@ import {User} from "../models/user";
 export class ProfileComponent {
 
   currentUser: User = new User(-1, '', '', '');
-
   selectedFile!: File;
   maxFileSize = 5 * 1024 * 1024; // 5MB for image size upload
 

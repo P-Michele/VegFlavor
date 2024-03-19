@@ -39,7 +39,6 @@ export class AuthService {
       .subscribe();
   }
 
-
  login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<string> {
   return this.http.post<{ token: string }>(
     `${environment.apiUrl}/api/user/login`,
@@ -76,8 +75,6 @@ export class AuthService {
   isTokenExpired(): boolean {
     const token: string | null = localStorage.getItem(this.JWT_TOKEN);
     if (!token) {
-      // Il token non è presente, quindi l'utente non è autenticato
-      this.router.navigate(['/login']);
       return true;
     }
 
@@ -85,8 +82,6 @@ export class AuthService {
     const isExpired = this.jwtHelper.isTokenExpired(token);
 
     if (isExpired) {
-      // Se il token è scaduto, reindirizza l'utente alla pagina di login
-      this.router.navigate(['/login']);
       return true;
     }
 
