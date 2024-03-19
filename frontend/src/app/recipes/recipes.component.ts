@@ -29,10 +29,17 @@ export class RecipesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      const initialPage = params['page'] ? Number(params['page']) : 1;
-      this.getRecipes(initialPage);
-    });
+      // prende i parametri dall'url 
+      const params = this.activatedRoute.snapshot.queryParams;
+      //controlla se esistono e se uno si riferisce a page 
+      if (params && params['page']) {
+        //se è cosi prende la pagina in questione e reindirizza l'utente alla pagina richiesta 
+        const page = (params['page']);
+        this.getRecipes(page);
+      } else {
+        // altrimenti va nella pagina not found 
+        this.router.navigate(['/404']);
+      }
   }
 
   getRecipes(currentPage: number): void {
