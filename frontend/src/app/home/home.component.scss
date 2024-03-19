@@ -56,57 +56,88 @@ nav ul li a {
 
 /* Featured Recipes Section */
 .featured-recipes {
-  padding: 50px 0;
+  padding: 40px 0;
 }
 
 .featured-recipes h2 {
-  font-size: 2em;
+  font-size: 5em;
   margin-bottom: 30px;
   text-align: center;
 }
 
 .recipes {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .recipe {
-  width: 30%;
-  background-color: #fff;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  max-width: 800px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  border: 2px solid #a2e46f;
+  border-radius: 10px;
+  background-color: #dee8da;
+  box-shadow: 4px 4px 8px #819275;
+  padding: 1%;
+  justify-content: space-between;
 }
 
 .recipe img {
-  width: 100%;
+  width: 300px;
   height: auto;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.recipe-details{
+  flex-basis: calc(50% - 20px);
+  flex-grow: 1;
+  padding: 0 20px;
 }
 
 .recipe h3 {
-  font-size: 1.5em;
-  padding: 20px;
+  margin-top: 0;
+  font-size: 35px;
+  
 }
 
 .recipe p {
-  padding: 0 20px 20px 20px;
+  margin-top: 5px;
+  font-size: 20px;
 }
 
 .recipe a {
   display: block;
-  background-color: #333;
+  background-color: #15d47b;
   color: #fff;
   text-align: center;
-  padding: 15px 0;
+  padding: 10px 20px;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .recipe a:hover {
   background-color: #555;
 }
+.recipe:hover{
+  box-shadow: 0 0 10px 5px #a2e46f;
+  transition: transform 0.3s;
+  transform: scale(1.1);
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .recipe {
+    flex-direction: column;
+  }
+
+  .recipe img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 
 /* Footer */
 footer {
@@ -133,5 +164,13 @@ footer {
   width: 30px;
   height: 30px;
 }
-
-
+div.btn{
+  background-color: greenyellow;
+  color: rgb(166, 53, 53);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
