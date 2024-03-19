@@ -28,44 +28,16 @@ export class ProfileComponent {
     }
   }
 
-  openFileUploader() {
-    const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
-    fileInput.click();
-  }
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0] as File;
-
-    if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
-      alert('Il file che stai caricando non è un\'immagine. Riprova con un formato valido.');
-      event.target.value = '';
-      return;
-    }
-
-    if (file.size > this.maxFileSize) {
-      alert('Il file che stai caricando supera i 5MB consentiti. Riprova con un file più piccolo.');
-      event.target.value = '';
-      return;
-    }
-    this.selectedFile = file;
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const img = document.getElementById('profileImage') as HTMLImageElement;
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
-    }
-  }
   saveChange() {
     if(this.currentUser.name != null || this.currentUser.surname != null || this.currentUser.email != null){
       this.ProfileService.uploadProfileInfo( this.currentUser.name, this.currentUser.surname, this.currentUser.email).subscribe(
         (response) => {
           alert('I tuoi dati sono stati aggiornati correttamente');
     });
+    }
+    else{
+      alert('Compila tutti i campi per salvare le modifiche');
+    }
   }
-  else{
-    alert('Compila tutti i campi per salvare le modifiche');
-  }
-}
+
 }
