@@ -28,6 +28,9 @@
           </li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a *ngIf="isLoggedIn()" class="nav-link text-success" [routerLink]="'createRecipe'" >Crea la tua ricetta</a>
+        </li>
       </ul>
     </div>
   </div>
