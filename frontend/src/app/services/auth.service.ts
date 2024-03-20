@@ -1,7 +1,6 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user';
-import { BehaviorSubject, Observable, of} from 'rxjs';
 import {first,catchError,tap, map} from 'rxjs/operators';
 import { environment } from '../../environments/environment.development';
 import { ErrorHandlerService } from './error-handler.service';
@@ -44,20 +43,20 @@ export class AuthService {
     )
     //metodo per ricavare diversi parametri per elaborare la risposta
     .pipe(
-      //prende solo il primo risultato corrispondente senza fare altri controlli 
+      //prende solo il primo risultato corrispondente senza fare altri controlli
       first(),
-      //estrae il token 
+      //estrae il token
       map(tokenObject => tokenObject.token),
-      //utilizzata per fare operazioni aggiuntive in parallelo 
+      //utilizzata per fare operazioni aggiuntive in parallelo
       tap(token => {
         //setta il token estratto nel localstorage
         localStorage.setItem(this.JWT_TOKEN, token);
-        //rinvia l'utente alla pagina home 
+        //rinvia l'utente alla pagina home
         this.router.navigate(['/home']);
       }),
       catchError(this.errorHandlerService.handleError<string>("login"))).subscribe();
-  } 
-  
+  }
+
   getCurrentUser(): User | null {
     let token = localStorage.getItem(this.JWT_TOKEN);
     if(token){

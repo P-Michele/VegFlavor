@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { recipesLoader } from "../services/recipes-loader.service";
 import { environment } from '../../environments/environment.development';
 
 @Component({
@@ -12,18 +13,19 @@ import { environment } from '../../environments/environment.development';
 export class RecipeComponent {
 
   @Input()
-  recipeId?: number;
+  recipeId !: number;
   title ?: string;
   description ?: string;
-  src = `${environment.apiUrl}`;
+  path = `${environment.apiUrl}/`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loader : recipesLoader) { }
 
   ngOnInit(): void {
-    this.http.get<any>(`${environment.apiUrl}/api/recipes/${this.recipeId}`).subscribe(data => {
-     this.title = data.title;
-     this.description = data.description;
-     this.src += data.imagePath;
+    this.loader.recipeLoad(this.recipeId).subscribe((data: any) => {
+      this.title = data.title;
+      this.description = data.description;
+      this.path += data.imagePath;
+      this.path =this.path.replace(/\\/g, '/');
     });
   }
 
