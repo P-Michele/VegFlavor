@@ -128,5 +128,4 @@ export class RecipesComponent implements OnInit {
 
     return result;
   }
-
 }

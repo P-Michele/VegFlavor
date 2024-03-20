@@ -66,16 +66,16 @@ export class AuthService {
     return null;
   }
 
- /* isLoggedIn() {
+ isLoggedIn() {
     return !!localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
-  }*/
+  }
 
   logout(): void {
     localStorage.removeItem(this.JWT_TOKEN);
     this.router.navigate(['/login']);
   }
 
-  /*isTokenExpired(): boolean {
+  isTokenExpired(): boolean {
     const token: string | null = localStorage.getItem(this.JWT_TOKEN);
     if (!token) {
       return true;
@@ -89,6 +89,6 @@ export class AuthService {
     }
 
     return false;
-  }*/
+  }
 
 }
