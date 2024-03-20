@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { Recipe } from '../models/recipe';
-import { HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { AuthService } from './auth.service';
 import { ErrorHandlerService } from './error-handler.service';
@@ -18,10 +18,10 @@ export class RecipesService {
     const url = `${environment.apiUrl}/api/recipes?page=${page}`;
     return this.http.get<any>(url);
   }
-  
+
   getRecipe(id: number): Observable<Recipe> {
     const url = `${environment.apiUrl}/api/recipes/${id}`;
     return this.http.get<Recipe>(url);
   }
-  
+
 }

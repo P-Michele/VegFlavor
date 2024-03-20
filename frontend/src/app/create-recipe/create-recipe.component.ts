@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {Recipe} from "../models/recipe";
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 
 @Component({
@@ -21,6 +21,7 @@ export class CreateRecipeComponent {
   recipe: Recipe = new Recipe();
   ingredient: string = '';
   quantity !: number;
+  file !: File;
 
   constructor(private http:HttpClient) {}
 
@@ -37,7 +38,7 @@ export class CreateRecipeComponent {
     const file = event.target.files.item(0);
     if (file && file.type.match('image/png')){
       const fileNameDisplay = document.getElementById('fileNameDisplay');
-      this.recipe.selectedFile = file;
+      this.file = file;
       if (fileNameDisplay) {
         fileNameDisplay.textContent = file.name;
       }
@@ -45,7 +46,7 @@ export class CreateRecipeComponent {
       alert('formato invalido, si accettano solo file .png');
     }
     //this.recipe.selectedFile = event.target.files.item(0);
-    
+
     const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
     if (imagePreview && file.type.startsWith('image')) {
       imagePreview.style.display = 'block';
@@ -64,10 +65,9 @@ export class CreateRecipeComponent {
 
  onSubmit() {
     let formData = new FormData();
-    formData.append("image", this.recipe.selectedFile);
+    formData.append("image", this.file);
     formData.append("recipeData" ,JSON.stringify(this.recipe));
-     console.log(formData,this.recipe);
-     this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe(() => {
+    this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe(() => {
       // Clear input fields and labels after successful HTTP request
       this.recipe = new Recipe();
       this.ingredient = '';
@@ -91,4 +91,5 @@ export class CreateRecipeComponent {
     imagePreview.style.display = 'none'; // Hide the image preview
   }
  }
+
 }

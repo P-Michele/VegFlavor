@@ -7,13 +7,14 @@ export class Recipe {
   prepTime !: number;
   cookTime !: number;
   servingSize !: number;
-  selectedFile !: File;
+  path !: string;
 
   constructor(){
     this.title = '';
     this.description = '';
     this.instructions = '';
     this.ingredients = [];
+    this.path = ''
   }
 
 }
