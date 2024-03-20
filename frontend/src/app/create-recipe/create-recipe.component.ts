@@ -34,7 +34,27 @@ export class CreateRecipeComponent {
   }
 
   selectFile(event: any): void {
-    this.recipe.selectedFile = event.target.files.item(0);
+    const file = event.target.files.item(0);
+    if (file && file.type.match('image/png')){
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      this.recipe.selectedFile = file;
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = file.name;
+      }
+    }else{
+      alert('formato invalido, si accettano solo file .png');
+    }
+    //this.recipe.selectedFile = event.target.files.item(0);
+    
+    const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
+    if (imagePreview && file.type.startsWith('image')) {
+      imagePreview.style.display = 'block';
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        imagePreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 
@@ -46,9 +66,29 @@ export class CreateRecipeComponent {
     let formData = new FormData();
     formData.append("image", this.recipe.selectedFile);
     formData.append("recipeData" ,JSON.stringify(this.recipe));
-
      console.log(formData,this.recipe);
-     console.log(this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe());
+     this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe(() => {
+      // Clear input fields and labels after successful HTTP request
+      this.recipe = new Recipe();
+      this.ingredient = '';
+      this.quantity = 0;
+      this.clearInputImage();
+      this.clearImagePreview();
+    });
  }
 
+ clearInputImage() {
+    // Clear the selected image
+    const inputElement: HTMLInputElement = document.getElementById('fileNameDisplay') as HTMLInputElement;
+    if (inputElement) {
+      inputElement.textContent = ''; // Clear the input value
+    }
+ }
+ clearImagePreview() {
+  const imagePreview: HTMLImageElement = document.getElementById('imagePreview') as HTMLImageElement;
+  if (imagePreview) {
+    imagePreview.src = ''; // Clear the image source
+    imagePreview.style.display = 'none'; // Hide the image preview
+  }
+ }
 }

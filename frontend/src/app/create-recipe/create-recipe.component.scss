@@ -4,3 +4,47 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.form-group {
+    label {
+      /* Style the label */
+      display: inline-block;
+      cursor: pointer;
+      padding: 0.5em 1em;
+      background-color: #198754;
+      color: #fff;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+  
+    /* Style the file input */
+    input[type='file'] {
+      display: none; /* Hide the input element */
+    }
+  
+    /* Apply styles to the label when hovering over it */
+    label:hover {
+      background-color: #157347;
+    }
+  }
+  .file-label {
+    /* Your button styles */
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    background-color: #198754;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-name {
+    margin-left: 10px; // Add some spacing between the label and the file name
+  }
+  .image-preview {
+    display: none; // Initially hide the image preview
+    margin-top: 10px; // Add some spacing between the file input and the image preview
+    max-width: 200px; // Set maximum width for the preview
+    max-height: 200px; // Set maximum height for the preview
+  }
+  
+  
