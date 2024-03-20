@@ -1,6 +1,7 @@
 const db = require('../models');
 const Recipe = db.recipes;
 const {matchedData} = require("express-validator");
+const {deleteFile} = require("../services/fileDeletionService");
 
 const getRecipes = (req, res) => {
     const page = matchedData(req, { includeOptionals: true }).page || 1;
@@ -63,7 +64,7 @@ const addRecipe = (req, res) => {
         prepTime,
         cookTime,
         servingSize,
-        imagePath: req.file.path,
+        imageName: req.file.filename,
         userId: req.userId
     })
     .then((newRecipe)=>{
@@ -75,5 +76,31 @@ const addRecipe = (req, res) => {
     })
 };
 
+const deleteRecipe = (req, res) => {
+    const { id } = matchedData(req);
+    Recipe.findByPk(id)
+        .then(recipe => {
+            if (!recipe) {
+                return res.status(404).json({ message: "Recipe not found" }); // If recipe not found, return 404 status
+            }
+            if(req.isAdmin === false && req.userId !== recipe.userId){
+                return res.status(403).json({message: "User not permitted"});
+            }
+            recipe.destroy()
+                .then(()=>{
+                    deleteFile(recipe.imageName);
+                    res.status(204).end();
+                })
+                .catch(error=>{
+                    console.error("Error deleting recipe:", error);
+                    res.status(500).json({ message: "Internal server error" });
+                }) // Delete the recipe
+        })
+        .catch(error => {
+            console.error("Error fetching recipe for deletion:", error);
+            res.status(500).json({ message: "Internal server error" });
+        });
+};
 
-module.exports = { getRecipes, getRecipe, addRecipe };
+
+module.exports = { getRecipes, getRecipe, addRecipe, deleteRecipe };

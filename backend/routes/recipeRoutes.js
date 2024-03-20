@@ -1,6 +1,6 @@
 const express = require("express");
-const { getRecipes, getRecipe, addRecipe } = require("../controllers/recipeController");
-const { getRecipesValidator, getRecipeValidator, addRecipeValidator } = require("../validators/recipeValidators");
+const { getRecipes, getRecipe, addRecipe, deleteRecipe } = require("../controllers/recipeController");
+const { getRecipesValidator, getRecipeValidator, addRecipeValidator, deleteRecipeValidator } = require("../validators/recipeValidators");
 const { verifyToken } = require("../middlewares/authenticationMiddleware");
 const { uploadErrorHandler } = require("../middlewares/fileUploadMiddleware");
 const {upload}=require("../configs/multerConfig");
@@ -15,5 +15,6 @@ router.post("/", verifyToken, upload.single('image'), uploadErrorHandler, (req, 
   req.body = JSON.parse(req.body.recipeData);
   next();
 }, addRecipeValidator, addRecipe);
+router.delete("/:id", verifyToken, deleteRecipeValidator, deleteRecipe)
 
 module.exports = router;

@@ -51,4 +51,10 @@ const addRecipeValidator = [
     validationErrorHandler
 ];
 
-module.exports = { getRecipesValidator, getRecipeValidator, addRecipeValidator };
+const deleteRecipeValidator = [
+    param('id')
+        .isInt({ min: 1 }).withMessage("recipe id must be a positive integer"),
+    validationErrorHandler
+];
+
+module.exports = { getRecipesValidator, getRecipeValidator, addRecipeValidator, deleteRecipeValidator };
