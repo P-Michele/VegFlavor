@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 import {RecipesService} from "../services/recipes.service";
 import {RouterLink} from "@angular/router";
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-recipe',
@@ -19,17 +20,28 @@ export class RecipeComponent {
   recipeId !: number;
   title ?: string;
   description ?: string;
-  path = `${environment.apiUrl}/`;
+  path = `${environment.apiUrl}/uploads/`;
 
-  constructor(private http: HttpClient, private loader : RecipesService) { }
+  constructor(private loader : RecipesService) { }
 
   ngOnInit(): void {
     this.loader.getRecipe(this.recipeId).subscribe((data: any) => {
       this.title = data.title;
       this.description = data.description;
-      this.path += data.imagePath;
-      this.path =this.path.replace(/\\/g, '/');
+      this.path += data.imageName;
     });
   }
 
+  deleteRecipe(): void {
+    this.loader.deleteRecipe(this.recipeId)
+      .pipe(
+        catchError(error => {
+          console.error("Errore durante l'eliminazione della ricetta:", error);
+          throw error;
+        })
+      )
+      .subscribe(() => {
+        console.log("Ricetta eliminata con successo");
+      });
+  }
 }

@@ -67,7 +67,7 @@ export class AuthService {
   }
 
  isLoggedIn() {
-    return !!localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
+    return !!localStorage.getItem(this.JWT_TOKEN);
   }
 
   logout(): void {
@@ -75,7 +75,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  isTokenExpired(): boolean {
+  /*isTokenExpired(): boolean {
     const token: string | null = localStorage.getItem(this.JWT_TOKEN);
     if (!token) {
       return true;
@@ -89,6 +89,6 @@ export class AuthService {
     }
 
     return false;
-  }
+  }*/
 
 }

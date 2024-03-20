@@ -23,5 +23,10 @@ export class RecipesService {
     const url = `${environment.apiUrl}/api/recipes/${id}`;
     return this.http.get<Recipe>(url);
   }
+  
+  deleteRecipe(recipeId: number): Observable<any>{
+    const url = `${environment.apiUrl}/api/recipes/${recipeId}`;
+    return this.http.delete<any>(url);
+  }
 
 }
