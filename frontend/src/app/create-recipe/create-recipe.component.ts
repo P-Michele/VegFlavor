@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {Recipe} from "../models/recipe";
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 
 @Component({
@@ -21,6 +21,7 @@ export class CreateRecipeComponent {
   recipe: Recipe = new Recipe();
   ingredient: string = '';
   quantity !: number;
+  file !: File;
 
   constructor(private http:HttpClient) {}
 
@@ -34,7 +35,27 @@ export class CreateRecipeComponent {
   }
 
   selectFile(event: any): void {
-    this.recipe.selectedFile = event.target.files.item(0);
+    const file = event.target.files.item(0);
+    if (file && file.type.match('image/png')){
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      this.file = file;
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = file.name;
+      }
+    }else{
+      alert('formato invalido, si accettano solo file .png');
+    }
+    //this.recipe.selectedFile = event.target.files.item(0);
+
+    const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
+    if (imagePreview && file.type.startsWith('image')) {
+      imagePreview.style.display = 'block';
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        imagePreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 
@@ -44,11 +65,31 @@ export class CreateRecipeComponent {
 
  onSubmit() {
     let formData = new FormData();
-    formData.append("image", this.recipe.selectedFile);
+    formData.append("image", this.file);
     formData.append("recipeData" ,JSON.stringify(this.recipe));
+    this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe(() => {
+      // Clear input fields and labels after successful HTTP request
+      this.recipe = new Recipe();
+      this.ingredient = '';
+      this.quantity = 0;
+      this.clearInputImage();
+      this.clearImagePreview();
+    });
+ }
 
-     console.log(formData,this.recipe);
-     console.log(this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe());
+ clearInputImage() {
+    // Clear the selected image
+    const inputElement: HTMLInputElement = document.getElementById('fileNameDisplay') as HTMLInputElement;
+    if (inputElement) {
+      inputElement.textContent = ''; // Clear the input value
+    }
+ }
+ clearImagePreview() {
+  const imagePreview: HTMLImageElement = document.getElementById('imagePreview') as HTMLImageElement;
+  if (imagePreview) {
+    imagePreview.src = ''; // Clear the image source
+    imagePreview.style.display = 'none'; // Hide the image preview
+  }
  }
 
 }

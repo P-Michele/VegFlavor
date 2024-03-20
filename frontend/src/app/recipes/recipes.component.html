@@ -1,16 +1,8 @@
 
 <title>Tutte le Ricette</title>
 
-<div class="recipe">
-  <img src="/assets/temi/ricetta1.jpg" alt="Pasta primavera">
-  <div class="recipe-details">
-    <h3>{{  recipe.title }}</h3>
-    <p class="description">{{  recipe.description }}</p>
-    <button class="btn btn-success btn-lg" href="#">Scopri la ricetta</button>
-  </div>
-</div>
-
 <nav aria-label="Page navigation example">
+  <p style="text-align: center;">Sei Nella Pagina: {{currentPage}}</p>
     <ul class="pagination active">
       <li class="page-item" (click)="prevPage()">
         <a class="page-link" aria-label="Previous">Precedente</a>

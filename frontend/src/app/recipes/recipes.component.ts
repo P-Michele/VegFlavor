@@ -5,21 +5,22 @@ import { RecipesService } from '../services/recipes.service';
 import { CommonModule} from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable} from 'rxjs';
+import { RecipeComponent } from "../recipe/recipe.component";
 
 
 @Component({
-  selector: 'app-recipes',
-  standalone: true,
-  imports: [CommonModule,RouterLink],
-  templateUrl: './recipes.component.html',
-  styleUrl: './recipes.component.scss'
+    selector: 'app-recipes',
+    standalone: true,
+    templateUrl: './recipes.component.html',
+    styleUrl: './recipes.component.scss',
+    imports: [CommonModule, RouterLink, RecipeComponent]
 })
 export class RecipesComponent implements OnInit {
 
   pageSize!: number;
   recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number,totalRecipes:number }>;
   totalPages!:number;
-  recipe!: Recipe;
+  //recipe!: Recipe;
   currentPage!: number;
 
   constructor(
@@ -29,10 +30,17 @@ export class RecipesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      const initialPage = params['page'] ? Number(params['page']) : 1;
-      this.getRecipes(initialPage);
-    });
+      // prende i parametri dall'url 
+      const params = this.activatedRoute.snapshot.queryParams;
+      //controlla se esistono e se uno si riferisce a page 
+      if (params && params['page']) {
+        //se è cosi prende la pagina in questione e reindirizza l'utente alla pagina richiesta 
+        const page = (params['page']);
+        this.getRecipes(page);
+      } else {
+        // altrimenti va nella pagina not found 
+        this.router.navigate(['/404']);
+      }
   }
 
   getRecipes(currentPage: number): void {
@@ -120,5 +128,4 @@ export class RecipesComponent implements OnInit {
 
     return result;
   }
-
 }

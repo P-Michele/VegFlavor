@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import {RecipeComponent} from "../recipe/recipe.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RecipeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
- 
+
   maxLength:number = 100;
   constructor() { }
+
   ngOnInit(): void {
       this.truncateDescription();
+      
   }
   truncateDescription(): void {
     const descriptionElement = document.querySelector('.description');
@@ -24,6 +27,6 @@ export class HomeComponent implements OnInit{
         descriptionElement.textContent = text;
       }
     }
-  }    
+  }
 }
 
