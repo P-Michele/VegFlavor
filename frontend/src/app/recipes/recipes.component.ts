@@ -5,21 +5,22 @@ import { RecipesService } from '../services/recipes.service';
 import { CommonModule} from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable} from 'rxjs';
+import { RecipeComponent } from "../recipe/recipe.component";
 
 
 @Component({
-  selector: 'app-recipes',
-  standalone: true,
-  imports: [CommonModule,RouterLink],
-  templateUrl: './recipes.component.html',
-  styleUrl: './recipes.component.scss'
+    selector: 'app-recipes',
+    standalone: true,
+    templateUrl: './recipes.component.html',
+    styleUrl: './recipes.component.scss',
+    imports: [CommonModule, RouterLink, RecipeComponent]
 })
 export class RecipesComponent implements OnInit {
 
   pageSize!: number;
   recipes$!: Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number,totalRecipes:number }>;
   totalPages!:number;
-  recipe!: Recipe;
+  //recipe!: Recipe;
   currentPage!: number;
 
   constructor(

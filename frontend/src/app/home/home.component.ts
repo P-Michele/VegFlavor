@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit{
 
   maxLength:number = 100;
   constructor() { }
+
   ngOnInit(): void {
       this.truncateDescription();
+      
   }
   truncateDescription(): void {
     const descriptionElement = document.querySelector('.description');

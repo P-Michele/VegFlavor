@@ -36,7 +36,7 @@ export class RecipeDetailsComponent {
   }
 
   goToFirstPage(): void {
-    this.router.navigate(['/recipes']);
+    this.router.navigate(['/recipes'], { queryParams: { page: 1 } });
   }
 }
  
