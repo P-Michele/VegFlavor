@@ -18,12 +18,14 @@ import { environment } from '../../environments/environment.development';
 
 export class CreateRecipeComponent {
 
-  recipe: Recipe = new Recipe();
+  recipe: Recipe;
   ingredient: string = '';
   quantity !: number;
   file !: File;
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient) {
+    this.recipe = new Recipe();
+  }
 
   addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
@@ -45,7 +47,6 @@ export class CreateRecipeComponent {
     }else{
       alert('formato invalido, si accettano solo file .png');
     }
-    //this.recipe.selectedFile = event.target.files.item(0);
 
     const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
     if (imagePreview && file.type.startsWith('image')) {
@@ -57,7 +58,6 @@ export class CreateRecipeComponent {
       reader.readAsDataURL(file);
     }
   }
-
 
   removeIngredient(index: number) {
     this.recipe.ingredients.splice(index, 1);

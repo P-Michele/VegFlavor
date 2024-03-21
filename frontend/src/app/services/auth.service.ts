@@ -61,13 +61,14 @@ export class AuthService {
     let token = localStorage.getItem(this.JWT_TOKEN);
     if(token){
       let decodedToken = this.jwtHelper.decodeToken(token);
-      return new User(decodedToken.Id, decodedToken.Name, decodedToken.Surname, decodedToken.Email);
+      return new User(decodedToken.Id, decodedToken.Name, decodedToken.Surname,
+        decodedToken.Email, decodedToken.IsAdmin);
     }
     return null;
   }
 
  isLoggedIn() {
-    return !!localStorage.getItem(this.JWT_TOKEN);
+    return !!localStorage.getItem(this.JWT_TOKEN) && !this.isTokenExpired();
   }
 
   logout(): void {
@@ -75,20 +76,20 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  /*isTokenExpired(): boolean {
+  isTokenExpired(): boolean {
     const token: string | null = localStorage.getItem(this.JWT_TOKEN);
     if (!token) {
       return true;
     }
-
-    // Verifica se il token è scaduto
     const isExpired = this.jwtHelper.isTokenExpired(token);
-
     if (isExpired) {
       return true;
     }
-
     return false;
-  }*/
+  }
+
+  isAdmin(){
+    return !!this.getCurrentUser()?.isAdmin;
+  }
 
 }

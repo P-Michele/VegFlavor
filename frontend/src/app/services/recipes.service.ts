@@ -3,6 +3,7 @@ import { Observable} from 'rxjs';
 import { Recipe } from '../models/recipe';
 import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class RecipesService {
   deleteRecipe(recipeId: number): Observable<any>{
     const url = `${environment.apiUrl}/api/recipes/${recipeId}`;
     return this.http.delete<any>(url);
+  }
+
+  canDelete(id : number){
+
   }
 
 }

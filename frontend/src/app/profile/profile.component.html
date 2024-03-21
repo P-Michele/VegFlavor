@@ -1,8 +1,8 @@
 <div class="container-xl px-4 mt-4">
   <!-- Account page navigation-->
   <nav class="nav nav-borders">
-    <a class="nav-link" href="#" target="__blank">Sicurezza</a>
-    <a class="nav-link" href="#" target="__blank">Le tue ricette</a>
+    <a class="nav-link">Sicurezza</a>
+    <a class="nav-link">Le tue ricette</a>
   </nav>
   <hr class="mt-0 mb-4">
   <div class="row">
@@ -16,9 +16,6 @@
             alt="">
           <!-- Profile picture help block-->
           <div class="small font-italic text-muted mb-4">JPG o PNG di 5MB al massimo</div>
-          <!-- Profile picture upload button-->
-          <input type="file" id="imageUpload" style="display: none;">
-          <button class="btn btn-primary btn-success" type="button">Carica nuova immagine</button>
         </div>
       </div>
     </div>
@@ -34,24 +31,22 @@
               <div class="col-md-6">
                 <label class="small mb-1" for="inputFirstName">Nome</label>
                 <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name"
-                  [(value)]="currentUser.name">
+                    [value]="currentUser?.surname">
               </div>
 
               <!-- Form Group (last name)-->
               <div class="col-md-6">
                 <label class="small mb-1" for="inputLastName">Cognome</label>
                 <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name"
-                  [value]="currentUser.surname">
+                  [value]="currentUser?.surname">
               </div>
             </div>
             <!-- Form Group (email address)-->
             <div class="mb-3">
               <label class="small mb-1" for="inputEmailAddress">Email address</label>
               <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"
-                [value]="currentUser.email">
+                [value]="currentUser?.email">
             </div>
-            <!-- Save changes button-->
-            <button class="btn btn-success" type="button" (click)="saveChange()">Salva</button>
           </form>
         </div>
       </div>
