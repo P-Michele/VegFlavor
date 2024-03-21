@@ -1,3 +1,4 @@
+
 export class Recipe {
   id!: number ;
   title !: string;
@@ -7,14 +8,14 @@ export class Recipe {
   prepTime !: number;
   cookTime !: number;
   servingSize !: number;
-  path !: string;
+  imageName !: string;
 
   constructor(){
     this.title = '';
     this.description = '';
     this.instructions = '';
     this.ingredients = [];
-    this.path = ''
+    this.imageName = '';
   }
 
 }

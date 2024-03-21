@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { environment } from '../../environments/environment.development';
 import {RecipesService} from "../services/recipes.service";
 import {RouterLink} from "@angular/router";
 import { catchError } from 'rxjs';
+import {Recipe} from "../models/recipe";
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-recipe',
@@ -20,15 +20,15 @@ export class RecipeComponent {
   recipeId !: number;
   title ?: string;
   description ?: string;
-  path = `${environment.apiUrl}/uploads/`;
+  path : string | undefined;
 
   constructor(private loader : RecipesService) { }
 
   ngOnInit(): void {
-    this.loader.getRecipe(this.recipeId).subscribe((data: any) => {
-      this.title = data.title;
-      this.description = data.description;
-      this.path += data.imageName;
+    this.loader.getRecipe(this.recipeId).subscribe((recipe: Recipe) => {
+      this.title = recipe.title;
+      this.description = recipe.description;
+      this.path = `${environment.apiUrl}/uploads/` + recipe.imageName;
     });
   }
 
@@ -44,4 +44,5 @@ export class RecipeComponent {
         console.log("Ricetta eliminata con successo");
       });
   }
+
 }
