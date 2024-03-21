@@ -15,6 +15,6 @@ router.post("/", verifyToken, upload.single('image'), uploadErrorHandler, (req, 
   req.body = JSON.parse(req.body.recipeData);
   next();
 }, addRecipeValidator, addRecipe);
-router.delete("/:id", verifyToken, deleteRecipeValidator, deleteRecipe)
+router.delete("/:id", verifyToken, deleteRecipeValidator, deleteRecipe);
 
 module.exports = router;
