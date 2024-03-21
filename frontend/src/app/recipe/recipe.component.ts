@@ -4,12 +4,14 @@ import {RouterLink} from "@angular/router";
 import { catchError } from 'rxjs';
 import {Recipe} from "../models/recipe";
 import { environment } from '../../environments/environment.development';
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-recipe',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.scss'

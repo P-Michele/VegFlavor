@@ -39,11 +39,11 @@ export const routes: Routes = [
     component: RecipesComponent
   },
   {
-    path: 'recipeDetails/:id',
+    path: 'recipe/details/:id',
     component: RecipeDetailsComponent
   },
   {
-    path: 'createRecipe',
+    path: 'recipe/create',
     component: CreateRecipeComponent,
      canActivate: [authGuardService]
   },
