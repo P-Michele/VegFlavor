@@ -1,10 +1,12 @@
 const express = require("express");
-const {registerUser, loginUser} = require("../controllers/userController");
+const {registerUser, loginUser, getUserRecipes} = require("../controllers/userController");
 const {registerUserValidator, loginUserValidator} = require("../validators/userValidators");
+const {verifyToken} = require("../middlewares/authenticationMiddleware")
 
 const router = express.Router();
 
 router.post("/register", registerUserValidator, registerUser);
 router.post("/login", loginUserValidator, loginUser);
+router.get("/recipes", verifyToken, getUserRecipes);
 
 module.exports = router;

@@ -2,6 +2,7 @@ const { signJwtToken } = require("../services/jwtService");
 const bcrypt = require('bcrypt');
 const db = require('../models');
 const User = db.users;
+const Recipe= db.recipes;
 const { matchedData } = require("express-validator");
 
 const registerUser = (req, res) => {
@@ -62,7 +63,20 @@ const loginUser = (req, res) => {
     });
 };
 
+const getUserRecipes = (req, res)=>{
+  Recipe.findAll({ where: { userId:req.userId } })
+  .then(recipes => {
+    res.status(200).json(recipes);
+  })
+  .catch(error => {
+    console.error('Error fetching recipes:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  });
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
+  getUserRecipes
 };
