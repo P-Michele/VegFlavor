@@ -34,7 +34,7 @@
 
               <div class="col-12">
                 <div class="row gy-4">
-                  <label for="Ingrediente">Ingredienti<span class="text-danger">*</span></label>
+                  <label>Ingredienti<span class="text-danger">*</span></label>
                   <div class="input-group mb-3 col">
                     <input type="text" class="form-control" placeholder="Ingrediente" aria-label="Ingrediente"
                       [(ngModel)]="ingredient" name="ingredient">
@@ -89,7 +89,7 @@
                     <i class="bi bi-person"></i>
                   </span>
                   <input type="number" class="form-control" id="servingSize" name="servingSize"
-                    [(ngModel)]="recipe.servingSize" min="1" required>
+                         [(ngModel)]="recipe.servingSize" min="1" required>
                 </div>
               </div>
 
@@ -107,8 +107,8 @@
                 </div>
               </div>
             </div>
-          </form>
 
+          </form>
         </div>
       </div>
     </div>

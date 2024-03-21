@@ -3,16 +3,14 @@ import { Observable} from 'rxjs';
 import { Recipe } from '../models/recipe';
 import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from './auth.service';
-import { ErrorHandlerService } from './error-handler.service';
-import { Router } from '@angular/router';
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService {
 
-  constructor(private router:Router ,private http: HttpClient,private authService:AuthService,private errorHandlerService: ErrorHandlerService) { }
+  constructor(private http: HttpClient) { }
 
   getRecipes(page: number): Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number,totalRecipes:number }> {
     const url = `${environment.apiUrl}/api/recipes?page=${page}`;
@@ -23,10 +21,14 @@ export class RecipesService {
     const url = `${environment.apiUrl}/api/recipes/${id}`;
     return this.http.get<Recipe>(url);
   }
-  
+
   deleteRecipe(recipeId: number): Observable<any>{
     const url = `${environment.apiUrl}/api/recipes/${recipeId}`;
     return this.http.delete<any>(url);
+  }
+
+  canDelete(id : number){
+
   }
 
 }

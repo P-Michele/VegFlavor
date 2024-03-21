@@ -1,8 +1,8 @@
 <h1>Dettagli della ricetta</h1>
 
-<div class="card" *ngIf="recipe$ | async as recipe">
+<div class="card" *ngIf="!error">
   <div class="card-body">
-    <img [src]="getImageUrl()" alt="{{ recipe.title }}" crossorigin class="recipe-image">
+    <img [src]="path" alt="{{ recipe.title }}" crossorigin class="recipe-image">
     <div class="recipe-details">
       <h3 class="card-title">{{ recipe.title }}</h3>
       <p class="card-text">{{ recipe.description }}</p>
@@ -18,7 +18,8 @@
       <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }}</p>
     </div>
   </div>
-
 </div>
-<button type="button" class="btn btn-outline-success" (click)="goToFirstPage()">Torna alla pagina 1 delle
-  ricette</button>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>

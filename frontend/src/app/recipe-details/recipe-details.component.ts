@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
-import { Recipe } from '../models/recipe';
-import { Observable, catchError} from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { ImageService } from '../services/image-service.service';
+import {Recipe} from "../models/recipe";
+import {Subscription, throwError} from "rxjs";
+import {environment} from "../../environments/environment.development";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,38 +16,35 @@ import { ImageService } from '../services/image-service.service';
 })
 
 export class RecipeDetailsComponent {
-  idRicetta!: number;
-  currentPage!:number;
-  pageSize!:number;
-  recipe$!:Observable<Recipe>;
-  error: any;
 
-  constructor(private recipesService:RecipesService,private route: ActivatedRoute,private router:Router, private imageService: ImageService) {}
+  recipe : Recipe;
+  path : string | undefined;
+  private routeSub !: Subscription;
+  protected error: string | undefined;
+
+  constructor(private recipesService:RecipesService,private route: ActivatedRoute) {
+    this.recipe = new Recipe();
+  }
 
   ngOnInit(): void {
-    // l'ID della ricetta dall'URL
-    const recipeId = this.route.snapshot.params['id'];
-    // Chiama il metodo del servizio per ottenere i dettagli della ricetta
-    this.recipe$ = this.recipesService.getRecipe(recipeId)
-    .pipe(
-      catchError((error: any) => {
-        this.error = error.message || 'Internal server error';
-        return [];
-      })
-    );
+    this.routeSub = this.route.params.subscribe(params => {
+      this.recipesService.getRecipe(params['id']).pipe(
+        catchError(error => {
+          this.error = 'Ricetta inesistente';
+          return throwError(error); // Rethrow the error
+        })
+      ).subscribe((recipe: any) => {
+        this.recipe = recipe;
+        this.path = `${environment.apiUrl}/uploads/` + recipe.imageName;
+      });
+    });
   }
 
-  goToFirstPage(): void {
-    this.router.navigate(['/recipes'], { queryParams: { page: 1 } });
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
-  getImageUrl() {
-    if (this.imageService.selectedFile) {
-      return URL.createObjectURL(this.imageService.selectedFile);
-    }else{
-      return '';
-    }
-  }
+
 }
- 
-  
+
+
 

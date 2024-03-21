@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
-import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -19,13 +18,14 @@ import { ImageService } from '../services/image-service.service';
 
 export class CreateRecipeComponent {
 
-  recipe: Recipe = new Recipe();
+  recipe: Recipe;
   ingredient: string = '';
   quantity !: number;
   file !: File;
 
-  constructor(private http:HttpClient,
-    private imageService: ImageService) {}
+  constructor(private http:HttpClient) {
+    this.recipe = new Recipe();
+  }
 
   addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
@@ -39,7 +39,6 @@ export class CreateRecipeComponent {
   selectFile(event: any): void {
     const file = event.target.files.item(0);
     if (file && file.type.match('image/png')){
-      this.imageService.selectedFile = file;
       const fileNameDisplay = document.getElementById('fileNameDisplay');
       this.file = file;
       if (fileNameDisplay) {
@@ -48,7 +47,6 @@ export class CreateRecipeComponent {
     }else{
       alert('formato invalido, si accettano solo file .png');
     }
-    //this.recipe.selectedFile = event.target.files.item(0);
 
     const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
     if (imagePreview && file.type.startsWith('image')) {
@@ -60,7 +58,6 @@ export class CreateRecipeComponent {
       reader.readAsDataURL(file);
     }
   }
-
 
   removeIngredient(index: number) {
     this.recipe.ingredients.splice(index, 1);

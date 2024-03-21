@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {RecipeComponent} from "../recipe/recipe.component";
-import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +12,11 @@ import { ImageService } from '../services/image-service.service';
 export class HomeComponent implements OnInit{
 
   maxLength:number = 100;
-  constructor(public imageService: ImageService) { }
+  constructor() { }
 
   ngOnInit(): void {
       this.truncateDescription();
-      
+
   }
   truncateDescription(): void {
     const descriptionElement = document.querySelector('.description');

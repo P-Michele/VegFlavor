@@ -1,9 +1,9 @@
-<div class="recipe">
+<div class="recipe" *ngIf="title && description && path">
   <img src="{{ path }}" alt="{{ title }}" crossorigin>
   <div class="recipe-details">
     <h3>{{ title }}</h3>
     <p class="description">{{ description }}</p>
-    <button class="btn btn-success btn-lg" [routerLink]="'/recipeDetails/' + recipeId">Scopri la ricetta</button>
-    <button class="btn btn-success btn-lg" (click)="deleteRecipe()">Cancella la ricetta</button>
+    <button class="btn btn-success btn-lg m-1" [routerLink]="'/recipe/details/' + recipeId">Scopri la ricetta</button>
+    <button class="btn btn-danger btn-lg m-1" (click)="deleteRecipe()">Cancella la ricetta</button>
   </div>
 </div>
