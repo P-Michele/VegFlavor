@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
+import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -23,7 +24,8 @@ export class CreateRecipeComponent {
   quantity !: number;
   file !: File;
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient,
+    private imageService: ImageService) {}
 
   addIngredient() {
     if (this.ingredient && (this.quantity && this.quantity > 0)) {
@@ -37,6 +39,7 @@ export class CreateRecipeComponent {
   selectFile(event: any): void {
     const file = event.target.files.item(0);
     if (file && file.type.match('image/png')){
+      this.imageService.selectedFile = file;
       const fileNameDisplay = document.getElementById('fileNameDisplay');
       this.file = file;
       if (fileNameDisplay) {

@@ -4,6 +4,7 @@ import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../models/recipe';
 import { Observable, catchError} from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -20,7 +21,7 @@ export class RecipeDetailsComponent {
   recipe$!:Observable<Recipe>;
   error: any;
 
-  constructor(private recipesService:RecipesService,private route: ActivatedRoute,private router:Router) {}
+  constructor(private recipesService:RecipesService,private route: ActivatedRoute,private router:Router, private imageService: ImageService) {}
 
   ngOnInit(): void {
     // l'ID della ricetta dall'URL
@@ -37,6 +38,13 @@ export class RecipeDetailsComponent {
 
   goToFirstPage(): void {
     this.router.navigate(['/recipes'], { queryParams: { page: 1 } });
+  }
+  getImageUrl() {
+    if (this.imageService.selectedFile) {
+      return URL.createObjectURL(this.imageService.selectedFile);
+    }else{
+      return '';
+    }
   }
 }
  

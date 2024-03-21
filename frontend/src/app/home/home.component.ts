@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {RecipeComponent} from "../recipe/recipe.component";
+import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import {RecipeComponent} from "../recipe/recipe.component";
 export class HomeComponent implements OnInit{
 
   maxLength:number = 100;
-  constructor() { }
+  constructor(public imageService: ImageService) { }
 
   ngOnInit(): void {
       this.truncateDescription();

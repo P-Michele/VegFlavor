@@ -4,6 +4,6 @@
     <h3>{{ title }}</h3>
     <p class="description">{{ description }}</p>
     <button class="btn btn-success btn-lg" [routerLink]="'/recipeDetails/' + recipeId">Scopri la ricetta</button>
-    <button (click)="deleteRecipe()">Cancella la ricetta</button>
+    <button class="btn btn-success btn-lg" (click)="deleteRecipe()">Cancella la ricetta</button>
   </div>
 </div>

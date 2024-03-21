@@ -16,4 +16,30 @@
 .btn-primary-custom {
     padding: 6px 12px; /* Imposta il padding interno del pulsante */
   }
-  
+.card-body{
+  display: flex;
+}
+.recipe-details {
+  flex-grow: 1; /* Allow the recipe details to take up remaining space */
+}
+
+.recipe-image-container {
+  margin-left: 20px; /* Adjust margin as needed */
+}
+
+.recipe-image {
+  float: left; /* Float the image to the left */
+  margin-right: 20px; /* Add some space between the image and recipe details */
+  max-width: 50%; /* Set maximum width to 50% of the container width */
+  height: auto; /* Maintain aspect ratio */
+}
+h3{
+  margin-top: 0;
+  font-size: 35px;
+}
+p{
+  font-size: 20px;
+}
+strong{
+  font-size: 20px;
+}
