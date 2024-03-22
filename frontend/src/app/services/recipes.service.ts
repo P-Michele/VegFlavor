@@ -27,8 +27,4 @@ export class RecipesService {
     return this.http.delete<any>(url);
   }
 
-  canDelete(id : number){
-
-  }
-
 }
