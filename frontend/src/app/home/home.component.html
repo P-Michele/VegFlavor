@@ -40,7 +40,7 @@
     </div>
 
     <div *ngFor="let recipe of recipes">
-      <app-recipe [recipe]="recipe"></app-recipe>
+      <app-recipe [recipe]="recipe" (recipeDeleted)="onDeleteRecipe($event)"></app-recipe>
     </div>
 
   </section>

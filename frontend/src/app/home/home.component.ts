@@ -40,6 +40,9 @@ export class HomeComponent implements OnInit{
     });
   }
 
+  onDeleteRecipe(recipeId: number): void {
+    this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
+  }
 
 }
 

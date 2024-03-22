@@ -8,6 +8,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import {authGuardService} from "./services/authGuard.service";
 import {CreateRecipeComponent} from "./create-recipe/create-recipe.component";
+import {MyRecipesComponent} from "./my-recipes/my-recipes.component";
 
 export const routes: Routes = [
 
@@ -46,6 +47,11 @@ export const routes: Routes = [
     path: 'recipe/create',
     component: CreateRecipeComponent,
      canActivate: [authGuardService]
+  },
+  {
+    path: 'profile/recipes',
+    component: MyRecipesComponent,
+    canActivate: [authGuardService]
   },
   {
     path: '**',

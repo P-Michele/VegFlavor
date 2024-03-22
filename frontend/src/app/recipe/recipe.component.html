@@ -4,6 +4,6 @@
     <h3>{{ recipe.title }}</h3>
     <p class="description">{{ recipe.description }}</p>
     <button class="btn btn-success btn-lg m-1" [routerLink]="'/recipe/details/' + recipe.id">Scopri la ricetta</button>
-    <button class="btn btn-danger btn-lg m-1" (click)="deleteRecipe()">Cancella la ricetta</button>
+    <button *ngIf="canDelete()" class="btn btn-danger btn-lg m-1" (click)="deleteRecipe()">Cancella la ricetta</button>
   </div>
 </div>
