@@ -3,7 +3,6 @@ import { Observable} from 'rxjs';
 import { Recipe } from '../models/recipe';
 import { HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,11 @@ export class RecipesService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipes(page: number): Observable<{ recipes: Recipe[], totalPages: number,page:number,pageSize:number,totalRecipes:number }> {
-    const url = `${environment.apiUrl}/api/recipes?page=${page}`;
+  getRecipes(page?: number): Observable<{ recipes: Recipe[], totalPages: number, page: number, pageSize: number, totalRecipes: number }> {
+    let url = `${environment.apiUrl}/api/recipes`;
+    if (page !== undefined) {
+      url += `?page=${page}`;
+    }
     return this.http.get<any>(url);
   }
 

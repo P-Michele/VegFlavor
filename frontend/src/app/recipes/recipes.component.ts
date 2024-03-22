@@ -4,8 +4,9 @@ import { Recipe } from '../models/recipe';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule} from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { RecipeComponent } from "../recipe/recipe.component";
+import {catchError} from "rxjs/operators";
 
 
 @Component({
@@ -30,25 +31,26 @@ export class RecipesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      // prende i parametri dall'url 
+      // prende i parametri dall'url
       const params = this.activatedRoute.snapshot.queryParams;
-      //controlla se esistono e se uno si riferisce a page 
-      if (params && params['page']) {
-        //se è cosi prende la pagina in questione e reindirizza l'utente alla pagina richiesta 
-        const page = (params['page']);
-        this.getRecipes(page);
-      } else {
-        // altrimenti va nella pagina not found 
-        this.router.navigate(['/404']);
-      }
+      //controlla se esistono e se uno si riferisce a page
+    const page = (params['page']);
+    this.getRecipes(page);
+
   }
 
-  getRecipes(currentPage: number): void {
-    this.recipes$ = this.recipesService.getRecipes(currentPage);
+  getRecipes(currentPage : number): void {
+    this.recipes$ = this.recipesService.getRecipes(currentPage).pipe(
+      catchError(error => {
+          // Effettua il redirect al percorso /404
+          this.router.navigate(['/404']);
+        return throwError(() => error);
+      })
+    );
     this.recipes$.subscribe(data => {
       this.totalPages = data.totalPages;
-      this.currentPage=data.page;
-      this.pageSize=data.pageSize;
+      this.currentPage = data.page;
+      this.pageSize = data.pageSize;
     });
   }
 
