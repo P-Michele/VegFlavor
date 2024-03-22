@@ -20,6 +20,11 @@ export class RecipesService {
     return this.http.get<any>(url);
   }
 
+  getAuthorRecipes(): Observable< Recipe[]> {
+    const url = `${environment.apiUrl}/api/user/recipes`;
+    return this.http.get<Recipe[]>(url);
+  }
+
   getRecipe(id: number): Observable<Recipe> {
     const url = `${environment.apiUrl}/api/recipes/${id}`;
     return this.http.get<Recipe>(url);
