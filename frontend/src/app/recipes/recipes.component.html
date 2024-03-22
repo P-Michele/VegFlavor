@@ -2,7 +2,7 @@
 <title>Tutte le Ricette</title>
 <div *ngIf="(recipes$ | async) as recipes">
   <div *ngFor="let recipe of recipes.recipes">
-    <app-recipe [recipeId]="recipe.id"></app-recipe>
+    <app-recipe [recipe]="recipe"></app-recipe>
   </div>
 </div>
 <nav aria-label="Page navigation example">

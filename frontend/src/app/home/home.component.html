@@ -39,7 +39,9 @@
       </div>
     </div>
 
-      <app-recipe [recipeId]="1" ></app-recipe>
+    <div *ngFor="let recipe of recipes">
+      <app-recipe [recipe]="recipe"></app-recipe>
+    </div>
 
   </section>
 </div>
