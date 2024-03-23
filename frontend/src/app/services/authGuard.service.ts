@@ -3,8 +3,7 @@ import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from
 import {AuthService} from "./auth.service";
 
 export const authGuardService:  CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
+  route: ActivatedRouteSnapshot
 ) => {
 
   let path = route.toString();
@@ -13,7 +12,7 @@ export const authGuardService:  CanActivateFn = (
     return inject(Router).createUrlTree(['/home']);
 
   if(!(inject(AuthService).isLoggedIn())){
-    if(path.includes("profile") || path.includes("createRecipe"))
+    if(path.includes("profile") || path.includes("createRecipe") || path.includes("profile/recipes"))
       return inject(Router).createUrlTree(['/login']);
   }
 

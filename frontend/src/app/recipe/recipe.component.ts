@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipesService} from "../services/recipes.service";
 import {RouterLink} from "@angular/router";
 import {Recipe} from "../models/recipe";
@@ -20,6 +20,7 @@ export class RecipeComponent implements OnInit{
 
   @Input()
   recipe !: Recipe;
+  @Output() recipeDeleted: EventEmitter<number> = new EventEmitter<number>();
   path !: string;
 
   constructor(private loader : RecipesService) {}
@@ -34,6 +35,7 @@ export class RecipeComponent implements OnInit{
       )
       .subscribe(() => {
         console.log("Ricetta eliminata con successo");
+        this.recipeDeleted.emit(this.recipe.id);
       });
   }
 
@@ -41,4 +43,7 @@ export class RecipeComponent implements OnInit{
     this.path = `${environment.apiUrl}/uploads/` + this.recipe.imageName;
   }
 
+  canDelete() {
+    return this.loader.canDelete(this.recipe.userId);
+  }
 }

@@ -4,44 +4,13 @@
     <p>Scopri piatti deliziosi e nutrienti che rispettano l'ambiente e gli animali.</p>
     <a [href]="'/recipes?page=' + 1" class="btn btn-success btn-lg">Scopri le ricette</a>
   </div>
-
 </section>
+
 <div class="container-fluid">
   <h1 style="text-align: center;">Ricette in primo piano</h1><br>
   <section class="recipes" style="align-items: center;">
-    <div class="recipe">
-      <img src="/assets/temi/ricetta1.jpg" alt="Pasta primavera">
-      <div class="recipe-details">
-        <h3>Pasta primavera</h3>
-        <p class="description">La pasta primavera è un piatto classico della cucina italiana che celebra i sapori freschi e vibranti della
-          primavera. Caratterizzata da una base di pasta, solitamente spaghetti o linguine, condita con una varietà di
-          verdure di stagione, la pasta primavera è un piatto versatile e colorato che può essere personalizzato secondo
-          i gusti individuali e l'offerta stagionale </p>
-        <button class="btn btn-success btn-lg" href="#">Scopri la ricetta</button>
-      </div>
-    </div>
-
-    <div class="recipe">
-      <img src="/assets/temi/ricetta2.jpg" alt="burger vegetali">
-      <div class="recipe-details">
-        <h3>Burger vegetali</h3>
-        <p class="description">I burger vegetali sono molto semplici da preparare con i legumi che preferite.</p>
-        <button class="btn btn-success btn-lg" href="#">Scopri la ricetta</button>
-      </div>
-    </div>
-
-    <div class="recipe">
-      <img src="/assets/temi/ricetta3.jpg" alt="Torta vegana al cioccolato">
-      <div class="recipe-details">
-        <h3>Torta vegana al cioccolato</h3>
-        <p  class="description">Una torta soffice e gustosa senza latticini e uova.</p>
-        <button class="btn btn-success btn-lg" href="#">Scopri la ricetta</button>
-      </div>
-    </div>
-
     <div *ngFor="let recipe of recipes">
-      <app-recipe [recipe]="recipe"></app-recipe>
+      <app-recipe [recipe]="recipe" (recipeDeleted)="onDeleteRecipe($event)"></app-recipe>
     </div>
-
   </section>
 </div>

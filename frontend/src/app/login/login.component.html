@@ -1,12 +1,9 @@
 <!-- login.component.html -->
 
 <section>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="assets/img/VeganLoginPage.jpg" class="img-fluid" alt="Sample image">
-      </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <div class="col-lg-6 col-lg-6 col-xl-4 offset-xl-1">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <!-- Email input -->
           <div class="form-outline mb-4">
@@ -25,7 +22,7 @@
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-success btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Non hai un account? <a routerLink="/register"
+            <p class="small fw-bold mt-2 pt-1 mb-0" >Non hai un account? <a routerLink="/register"
                       class="link-danger">Registrati</a>
             </p>
           </div>

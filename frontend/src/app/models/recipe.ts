@@ -1,6 +1,7 @@
 
 export class Recipe {
-  id!: number ;
+  id !: number ;
+  userId !: number;
   title !: string;
   description !: string;
   instructions !: string;

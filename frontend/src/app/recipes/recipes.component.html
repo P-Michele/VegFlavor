@@ -1,26 +1,14 @@
+<div class="recipe-list">
+  <h2>Tutte le Ricette</h2>
 
-<title>Tutte le Ricette</title>
-<div *ngIf="(recipes$ | async) as recipes">
-  <div *ngFor="let recipe of recipes.recipes">
-    <app-recipe [recipe]="recipe"></app-recipe>
+  <div *ngIf="(recipes$ | async) as recipes">
+    <div *ngFor="let recipe of recipes.recipes">
+      <app-recipe [recipe]="recipe"></app-recipe>
+    </div>
   </div>
+
+  <app-paginator 
+    [totalPages]="totalPages" 
+    [currentPage]="currentPage" 
+    (pageChange)="onPageChange($event)"></app-paginator>
 </div>
-<nav aria-label="Page navigation example">
-  <p style="text-align: center;">Sei Nella Pagina: {{currentPage}}</p>
-    <ul class="pagination active">
-      <li class="page-item" (click)="prevPage()">
-        <a class="page-link" aria-label="Previous">Precedente</a>
-      </li>
-      <ng-container *ngFor="let item of pageNumbers()">
-        <li class="page-item" *ngIf="item === '...'">
-            <a class="page-link">...</a>
-        </li>
-        <li class="page-item " *ngIf="item !== '...'">
-            <a class="page-link" (click)="goToPage(+item)" [class.active]="currentPage === item">{{ item }}</a>
-        </li>
-    </ng-container>
-      <li class="page-item" (click)="nextPage()">
-        <a class="page-link">Prossimo</a>
-      </li>
-  </ul>
-</nav>

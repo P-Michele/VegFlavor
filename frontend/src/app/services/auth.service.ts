@@ -41,17 +41,11 @@ export class AuthService {
   login(email: Pick<User, "email">, password: Pick<User, "password">): void {
     this.http.post<{ token: string }>(`${environment.apiUrl}/api/user/login`,{ email, password },this.httpOptions
     )
-    //metodo per ricavare diversi parametri per elaborare la risposta
     .pipe(
-      //prende solo il primo risultato corrispondente senza fare altri controlli
       first(),
-      //estrae il token
       map(tokenObject => tokenObject.token),
-      //utilizzata per fare operazioni aggiuntive in parallelo
       tap(token => {
-        //setta il token estratto nel localstorage
         localStorage.setItem(this.JWT_TOKEN, token);
-        //rinvia l'utente alla pagina home
         this.router.navigate(['/home']);
       }),
       catchError(this.errorHandlerService.handleError<string>("login"))).subscribe();
