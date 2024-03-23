@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define(
       "user", // Model name
       {
@@ -32,7 +32,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         }
       },
       {
-        // Options
         timestamps: true
       }
     );

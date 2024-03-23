@@ -1,5 +1,5 @@
 const { body, query, param } = require('express-validator');
-const { validationErrorHandler } = require("./validationResultHandler");
+const { validationErrorHandler } = require("../middlewares/validationResultMiddleware");
 
 const getRecipesValidator = [
     query('page')
