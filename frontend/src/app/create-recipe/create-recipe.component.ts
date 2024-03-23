@@ -20,7 +20,7 @@ export class CreateRecipeComponent {
 
   recipe: Recipe;
   ingredient: string = '';
-  quantity !: number;
+  quantity !: number | undefined;
   file !: File;
 
   constructor(private http:HttpClient) {
@@ -68,10 +68,9 @@ export class CreateRecipeComponent {
     formData.append("image", this.file);
     formData.append("recipeData" ,JSON.stringify(this.recipe));
     this.http.post(`${environment.apiUrl}/api/recipes`, formData).subscribe(() => {
-      // Clear input fields and labels after successful HTTP request
       this.recipe = new Recipe();
       this.ingredient = '';
-      this.quantity = 0;
+      this.quantity = undefined;
       this.clearInputImage();
       this.clearImagePreview();
     });
@@ -81,7 +80,7 @@ export class CreateRecipeComponent {
     // Clear the selected image
     const inputElement: HTMLInputElement = document.getElementById('fileNameDisplay') as HTMLInputElement;
     if (inputElement) {
-      inputElement.textContent = ''; // Clear the input value
+      inputElement.textContent = '';
     }
  }
  clearImagePreview() {

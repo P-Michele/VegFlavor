@@ -3,8 +3,7 @@ import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from
 import {AuthService} from "./auth.service";
 
 export const authGuardService:  CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
+  route: ActivatedRouteSnapshot
 ) => {
 
   let path = route.toString();
