@@ -30,8 +30,14 @@
 .recipe-image {
   float: left; /* Float the image to the left */
   margin-right: 20px; /* Add some space between the image and recipe details */
-  max-width: 50%; /* Set maximum width to 50% of the container width */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  height: auto;
+  max-height:50px;
+  width: auto; 
+  @media (min-width: 768px) {
+    /* Increase image size on laptops */
+    max-height: 300px;
+  }
 }
 h3{
   margin-top: 0;
@@ -42,4 +48,15 @@ p{
 }
 strong{
   font-size: 20px;
+}
+.card {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  display: flex; /* Use flexbox to make the card body responsive */
+  flex-direction: row; /* Stack the contents vertically */
 }

@@ -4,22 +4,24 @@
   <div class="card-body">
     <img [src]="path" alt="{{ recipe.title }}" crossorigin class="recipe-image">
     <div class="recipe-details">
-      <h3 class="card-title">{{ recipe.title }}</h3>
-      <p class="card-text">{{ recipe.description }}</p>
+      <h3 class="card-title"> Nome della ricetta: {{ recipe.title }}</h3>
+      <p class="card-text">Descrizione: {{ recipe.description }}</p>
       <p class="card-text"><strong>Istruzioni:</strong> {{ recipe.instructions }}</p>
-      Ingredients:
       <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
-          {{ ingredient.name }}: {{ ingredient.quantity }}
-        </li>
+        <p class="card-text"><strong>Ingredienti:</strong>
+          <li *ngFor="let ingredient of recipe.ingredients">
+            {{ ingredient.name }}: {{ ingredient.quantity }} g
+          </li></p>
+        
       </ul>
       <p class="card-text"><strong>Tempo di cottura:</strong> {{ recipe.cookTime }}</p>
       <p class="card-text"><strong>Tempo di preparazione:</strong> {{ recipe.prepTime }}</p>
-      <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }}</p>
+      <p class="card-text"><strong>Porzioni:</strong> {{ recipe.servingSize }} person*</p>
     </div>
   </div>
 </div>
 
 <div *ngIf="error" class="error-message">
   {{ error }}
-</div>
+</div><br>
+<button class="btn btn-success" (click)="returnToAllRecipes()">Ritorna a tutte le ricette</button>
