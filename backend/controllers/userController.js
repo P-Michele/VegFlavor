@@ -24,7 +24,7 @@ const registerUser = (req, res) => {
         .then(newUser => {
           signJwtToken(newUser)
             .then(token => {
-              res.status(201).json({ newUser, token });
+              res.status(201).json({ token });
             })
         })
     })

@@ -73,8 +73,8 @@ const getRecipes = (req, res) => {
       imageName: req.file.filename,
       userId: req.userId
     })
-    .then(newRecipe => {
-      res.status(201).json({ message: 'Recipe added successfully', recipe: newRecipe });
+    .then(() => {
+      res.status(201).json({ message: 'Recipe added successfully' });
     })
     .catch(error => {
       console.error('Error adding recipe:', error);
