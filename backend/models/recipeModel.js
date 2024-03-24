@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Recipe = sequelize.define("recipe", {
         id: {
           type: DataTypes.INTEGER,

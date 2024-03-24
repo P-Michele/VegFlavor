@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule } from '@angular/common';
 import {Recipe} from "../models/recipe";
@@ -22,7 +22,7 @@ export class RecipeDetailsComponent {
   private routeSub !: Subscription;
   protected error: string | undefined;
 
-  constructor(private recipesService:RecipesService,private route: ActivatedRoute) {
+  constructor(private recipesService:RecipesService,private route: ActivatedRoute, private router: Router) {
     this.recipe = new Recipe();
   }
 
@@ -43,6 +43,9 @@ export class RecipeDetailsComponent {
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }
+  returnToAllRecipes() {
+    this.router.navigate(['/recipes']);
+    }
 
 }
 

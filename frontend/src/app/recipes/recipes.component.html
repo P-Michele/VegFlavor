@@ -1,12 +1,14 @@
+<div class="recipe-list">
+  <h2>Tutte le Ricette</h2>
 
-<title>Tutte le Ricette</title>
-<div *ngIf="(recipes$ | async) as recipes">
-  <div *ngFor="let recipe of recipes.recipes">
-    <app-recipe [recipe]="recipe"></app-recipe>
+  <div *ngIf="(recipes$ | async) as recipes">
+    <div *ngFor="let recipe of recipes.recipes">
+      <app-recipe [recipe]="recipe"></app-recipe>
+    </div>
   </div>
-</div>
 
-<app-paginator
-  [totalPages]="totalPages" 
-  [currentPage]="currentPage" 
-  (pageChange)="onPageChange($event)"></app-paginator>
+  <app-paginator 
+    [totalPages]="totalPages" 
+    [currentPage]="currentPage" 
+    (pageChange)="onPageChange($event)"></app-paginator>
+</div>

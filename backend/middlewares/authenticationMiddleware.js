@@ -4,7 +4,7 @@ const jwtConfig = require("../configs/jwtConfig");
 const verifyToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
   if (!authHeader) {
-    return res.status(401).json({ message: 'Token missing' });
+    return res.status(401).json({ message: 'Auth header missing' });
   }
   const token = authHeader.split(' ')[1];
   jwt.verify(token, jwtConfig.secret, (error, decoded) => {

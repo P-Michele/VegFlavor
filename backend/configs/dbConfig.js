@@ -5,7 +5,6 @@ const db = {
     name: process.env.DB_NAME,
     dialect: "mysql",
 
-    // pool is optional, it will be used for Sequelize connection pool configuration
     pool: {
       max: 5,
       min: 0,

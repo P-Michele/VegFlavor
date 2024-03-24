@@ -1,5 +1,5 @@
 const dbConfig = require("../configs/dbConfig.js");
-const { Sequelize, DataTypes, Op } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
  dbConfig.name,
@@ -22,12 +22,11 @@ const sequelize = new Sequelize(
 const db = {};
 
 db.Sequelize = Sequelize;
-db.Op = Op;
 db.sequelize = sequelize;
 
 //Tables
-db.users = require("./userModel.js")(sequelize, Sequelize, DataTypes);
-db.recipes = require("./recipeModel.js")(sequelize, Sequelize, DataTypes);
+db.users = require("./userModel.js")(sequelize, DataTypes);
+db.recipes = require("./recipeModel.js")(sequelize, DataTypes);
 
 //Relations
 
