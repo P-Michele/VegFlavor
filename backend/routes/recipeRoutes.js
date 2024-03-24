@@ -1,7 +1,7 @@
 const express = require("express");
 const { getRecipes, getRecipe, addRecipe, deleteRecipe } = require("../controllers/recipeController");
 const { getRecipesValidator, getRecipeValidator, addRecipeValidator, deleteRecipeValidator } = require("../validators/recipeValidators");
-const { verifyToken } = require("../middlewares/authenticationMiddleware");
+const { verifyToken } = require("../middlewares/authMiddleware");
 const { uploadErrorHandler } = require("../middlewares/fileUploadMiddleware");
 const { upload } = require("../configs/multerConfig");
 
