@@ -13,7 +13,7 @@
       <div class="col-12 col-lg-9">
         <div class="bg-white border rounded shadow-sm overflow-hidden">
 
-          <form (submit)="onSubmit()">
+          <form (ngSubmit)="onSubmit()" #form="ngForm">
             <div class="row gy-4 gy-xl-5 p-4">
               <div class="col-12">
                 <label for="fullname" class="form-label">Nome<span class="text-danger">*</span></label>
@@ -39,7 +39,7 @@
                     <input type="text" class="form-control" placeholder="Ingrediente" aria-label="Ingrediente"
                       [(ngModel)]="ingredient" name="ingredient">
                     <input type="number" class="form-control" placeholder="Quantità" aria-label="Quantità"
-                      [(ngModel)]="quantity" name="quantity" min="1" required>
+                      [(ngModel)]="quantity" name="quantity">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                       (click)="addIngredient()">Aggiungi</button>
                   </div>
@@ -47,7 +47,7 @@
               </div>
               <div class="col-12">
                 <ul class="list-group">
-                  <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item">
+                  <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item" required>
                     {{ ingredient.name }} - {{ ingredient.quantity }}
                     <button class="btn btn-danger btn-sm" (click)="removeIngredient(i)">Rimuovi</button>
                   </li>
@@ -93,17 +93,17 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" >
                 Carica un'immagine della ricetta <label for="file">Seleziona un' immagine</label>
                 <input id="imageInput" type="file" class="form-control-file p-1" id="file" name="file"
-                  accept="image/png" (change)="selectFile($event)" required>
+                  accept="image/png" (change)="selectFile($event)" required formnovalidate #imageInputRef>
                   <span id="fileNameDisplay" class="file-name"></span>
                   <img id="imagePreview" class="image-preview" src="" alt="Immagine ricetta Preview">
               </div>
 
               <div class="col-12">
                 <div class="d-grid">
-                  <button class="btn btn-success btn-lg" type="submit">Invia Ricetta</button>
+                  <button class="btn btn-success btn-lg" type="submit" [disabled]="!form.valid || !imageInputRef.files || !imageInputRef.files[0]">Invia Ricetta</button>
                 </div>
               </div>
             </div>
