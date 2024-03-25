@@ -1,0 +1,12 @@
+.recipes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.recipe-item {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}

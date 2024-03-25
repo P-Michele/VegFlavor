@@ -1,3 +1,5 @@
-<div *ngFor="let recipe of recipes">
-  <app-recipe [recipe]="recipe" (recipeDeleted)="onDeleteRecipe($event)"></app-recipe>
+<div class="recipes-container">
+  <div *ngFor="let recipe of recipes" class="recipe-item">
+    <app-recipe [recipe]="recipe" (recipeDeleted)="onDeleteRecipe($event)"></app-recipe>
+  </div>
 </div>
